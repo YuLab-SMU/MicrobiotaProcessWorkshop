@@ -1,5 +1,8 @@
 ---
-output: github_document
+output:
+  md_document:
+    variant: gfm
+html_preview: false
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -22,18 +25,13 @@ The goal of MicrobiotaProcessWorkshop is to ...
 
 ## Installation
 
-You can install the released version of MicrobiotaProcessWorkshop from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("MicrobiotaProcessWorkshop")
-```
 
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
-library(MicrobiotaProcessWorkshop)
+library(MicrobiotaProcess)
 ## basic example code
 ```
 
