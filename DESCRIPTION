@@ -14,4 +14,6 @@ RoxygenNote: 7.1.1
 Suggests: 
     knitr,
     rmarkdown
+URL: https://github.com/xiangpin/MicrobiotaProcessWorkshop
+BugReports: https://github.com/xiangpin/MicrobiotaProcessWorkshop/issues
 VignetteBuilder: knitr
