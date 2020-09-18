@@ -1,10 +1,18 @@
 ---
-title: "MicrobiotaProcessWorkshop"
-output: rmarkdown::html_vignette
+title: "The workshop of analysis of microbiome dataset using MicrobiotaProcess"
+bibliography: MicrobiotaProcessWorkshop.bib
+biblio-style: apalike
+output:
+  bookdown::html_document2:
+    toc: true
+    toc_float: true
+    fig_caption: true
 vignette: >
   %\VignetteIndexEntry{MicrobiotaProcessWorkshop}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+editor_options:
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -12,8 +20,25 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+Biocpkg <- function (pkg){
+    sprintf("[%s](http://bioconductor.org/packages/%s)", pkg, pkg)
+}
+
+CRANpkg <- function(pkg){
+    cran <- "https://CRAN.R-project.org/package"
+    fmt <- "[%s](%s=%s)"
+    sprintf(fmt, pkg, cran, pkg)
+}
 ```
 
+# Load required packages
+
 ```{r setup}
-library(MicrobiotaProcessWorkshop)
+suppressPackageStartupMessages({
+    library(MicrobiotaProcess)
+    library(phyloseq)
+    library(ggplot2)
+    library(tidyverse)
+})
 ```
