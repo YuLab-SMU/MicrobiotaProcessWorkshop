@@ -6,7 +6,7 @@ home:
 
 template:
   params:
-    bootswatch: cerulean
+    bootswatch: flatly
 
 navbar:
   right:
