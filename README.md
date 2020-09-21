@@ -1,47 +1,32 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# MicrobiotaProcessWorkshop
+# The workshop of analysis of microbiome dataset using MicrobiotaProcess
 
-<!-- badges: start -->
+## Instructors name and contact information
 
-<!-- badges: end -->
+  - Shuangbin Xu: <xshuangbin@163.com>
+  - Guangchuang Yu: <guangchuangyu@gmail.com>
 
-The goal of MicrobiotaProcessWorkshop is to …
+# Workshop description
 
-## Installation
+## Pre-requisites
 
-## Example
+  - Basic knowledge of R syntax.
+  - Knowledge of or interest in `microbiome`.
+  - Familiarity with some `bioconductor` objects or `S4` class.
+  - A computer that runs on Unix-like system.
 
-This is a basic example which shows you how to solve a common problem:
+## *R* / *Bioconductor* packages used
 
-``` r
-library(MicrobiotaProcess)
-#> Registered S3 method overwritten by 'treeio':
-#>   method     from
-#>   root.phylo ape
-## basic example code
-```
+[MicrobiotaProcess](https://www.bioconductor.org/packages/devel/bioc/html/MicrobiotaProcess.html)
+[phyloseq](https://www.bioconductor.org/packages/release/bioc/html/phyloseq.html)
+[ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)
+[vegan](https://cran.r-project.org/web/packages/vegan/index.html)
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+## Time outline
 
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
+## Workshop goals and objectives
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
+### Learning goals
 
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!
+### Learning objectives

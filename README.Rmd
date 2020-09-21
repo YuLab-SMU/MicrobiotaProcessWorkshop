@@ -16,37 +16,33 @@ knitr::opts_chunk$set(
 )
 ```
 
-# MicrobiotaProcessWorkshop
+# The workshop of analysis of microbiome dataset using MicrobiotaProcess
 
-<!-- badges: start -->
-<!-- badges: end -->
+## Instructors name and contact information
 
-The goal of MicrobiotaProcessWorkshop is to ...
++ Shuangbin Xu: xshuangbin@163.com
++ Guangchuang Yu: guangchuangyu@gmail.com
 
-## Installation
+# Workshop description
 
+## Pre-requisites
 
-## Example
++ Basic knowledge of R syntax.
++ Knowledge of or interest in `microbiome`.
++ Familiarity with some `bioconductor` objects or `S4` class.
++ A computer that runs on Unix-like system.
 
-This is a basic example which shows you how to solve a common problem:
+## _R_ / _Bioconductor_ packages used
 
-```{r example}
-library(MicrobiotaProcess)
-## basic example code
-```
+[MicrobiotaProcess](https://www.bioconductor.org/packages/devel/bioc/html/MicrobiotaProcess.html)
+[phyloseq](https://www.bioconductor.org/packages/release/bioc/html/phyloseq.html)
+[ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)
+[vegan](https://cran.r-project.org/web/packages/vegan/index.html)
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+## Time outline
 
-```{r cars}
-summary(cars)
-```
+## Workshop goals and objectives
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
+### Learning goals
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+### Learning objectives
