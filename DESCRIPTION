@@ -18,6 +18,7 @@ Imports:
     vegan
 Suggests: 
     knitr,
+    svglite,
     bookdown,
     rmarkdown,
     coin,
