@@ -18,6 +18,7 @@ Imports:
     vegan
 Suggests: 
     knitr,
+    bookdown,
     rmarkdown,
     coin,
     ggtree,
