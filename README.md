@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# The workshop of analysis of microbiome dataset using MicrobiotaProcess
+# Workshop of analysis of microbiome dataset using MicrobiotaProcess
 
 ## Instructors name and contact information
 
@@ -18,13 +18,10 @@
 
 ## *R* / *Bioconductor* packages used
 
-[MicrobiotaProcess](https://www.bioconductor.org/packages/devel/bioc/html/MicrobiotaProcess.html)
-
-[phyloseq](https://www.bioconductor.org/packages/release/bioc/html/phyloseq.html)
-
-[ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)
-
-[vegan](https://cran.r-project.org/web/packages/vegan/index.html)
+*[MicrobiotaProcess](https://www.bioconductor.org/packages/devel/bioc/html/MicrobiotaProcess.html)
+*[phyloseq](https://www.bioconductor.org/packages/release/bioc/html/phyloseq.html)
+*[ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)
+*[vegan](https://cran.r-project.org/web/packages/vegan/index.html)
 
 ## Time outline
 
