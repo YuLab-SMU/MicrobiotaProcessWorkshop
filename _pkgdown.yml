@@ -10,6 +10,5 @@ template:
 
 navbar:
   right:
-    - icon: fa-github
-      href: https://github.com/xiangpin/MicrobiotaProcessWorkshop
-
+   - icon: fa-github
+     href: https://github.com/xiangpin/MicrobiotaProcessWorkshop
