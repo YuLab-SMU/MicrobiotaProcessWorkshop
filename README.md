@@ -19,8 +19,11 @@
 ## *R* / *Bioconductor* packages used
 
 [MicrobiotaProcess](https://www.bioconductor.org/packages/devel/bioc/html/MicrobiotaProcess.html)
+
 [phyloseq](https://www.bioconductor.org/packages/release/bioc/html/phyloseq.html)
+
 [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)
+
 [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
 
 ## Time outline
