@@ -8,3 +8,10 @@ install_deps:
 	-e 'if (!requireNamespace("remotes")) install.packages("remotes")' \
 	-e 'remotes::install_deps(dependencies = TRUE)'
 
+update:
+	git fetch origin master:utemp
+	git merge utemp
+	git push
+
+rd:
+	Rscript -e 'rmarkdown::render("README.Rmd")'
