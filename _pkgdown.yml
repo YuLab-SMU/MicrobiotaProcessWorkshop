@@ -6,7 +6,7 @@ template:
     ganalytics: UA-93043521-1
 
 home:
-  title: "Workshop of analysis of microbiome dataset using MicrobiotaProcess"
+  title: "Workshop of microbiome dataset analysis using MicrobiotaProcess"
   type: inverse
 
 
