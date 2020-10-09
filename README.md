@@ -9,6 +9,10 @@
 
 # Workshop description
 
+This workshop focuses on the bioinformatics analysis of `microbiome`.
+Specifically, we will demonstrate how to perform downstream analysis
+(after OTU picking) using `MicrobiotaProcess` and `phyloseq`.
+
 ## Pre-requisites
 
   - Basic knowledge of R syntax.
@@ -22,15 +26,37 @@
   - [MicrobiotaProcess](https://www.bioconductor.org/packages/devel/bioc/html/MicrobiotaProcess.html)
   - [phyloseq](https://www.bioconductor.org/packages/release/bioc/html/phyloseq.html)
   - [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)
+  - [ggtree](https://www.bioconductor.org/packages/release/bioc/html/ggtree.html)
   - [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
 
 ## Time outline
+
+## | Activity | Time |
+
+overview of Amplicon-Seq | 3m |  
+pipeline of Amplicon-Seq analysis | 4m |  
+Downstream analysis | 10m |  
+    \* rarefraction curve | |  
+    \* Alpha and beta analysis | |  
+    \* Biomarker discovery | |  
+      etc | |  
+Hands-on demonstration | 20m |  
+Q/A section | 5m |
 
 # Workshop goals and objectives
 
 ## Learning goals
 
+  - Understand the basic idea of microbiome.
+  - Identify the commonly practiced tools used in downstream analysis of
+    microbiome.
+  - Understand the common analysis of microbiome.
+
 ## Learning objectives
+
+  - Get familiar with the package `MicrobiotaProcess` and `phyloseq`.
+  - Perform different analysis of microbiome.
+  - Get familiar with the visualization of microbiome.
 
 ## Useful links
 
