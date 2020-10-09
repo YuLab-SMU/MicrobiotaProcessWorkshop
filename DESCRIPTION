@@ -29,3 +29,4 @@ Suggests:
 URL: https://xiangpin.github.io/MicrobiotaProcessWorkshop/
 BugReports: https://github.com/xiangpin/MicrobiotaProcessWorkshop/issues
 VignetteBuilder: knitr
+DockerImage: xushuangbin/microbiotaprocess_workshop:latest
