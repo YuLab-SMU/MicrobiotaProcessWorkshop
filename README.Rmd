@@ -43,8 +43,9 @@ This workshop focuses on the bioinformatics analysis of `microbiome`. Specifical
 + [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
 
 ## Time outline
+
 | Activity                           | Time |
----------------------------------------------
+|------------------------------------|------|
 | overview of Amplicon-Seq           |  3m  |
 | pipeline of Amplicon-Seq analysis  |  4m  |
 | Downstream analysis                | 10m  |
@@ -53,7 +54,7 @@ This workshop focuses on the bioinformatics analysis of `microbiome`. Specifical
 |     * Biomarker discovery          |      |
 |       etc                          |      |
 | Hands-on demonstration             | 20m  |
-| Q/A section                        | 5m   |
+| Q/A section                        |  5m  |
 
 # Workshop goals and objectives
 

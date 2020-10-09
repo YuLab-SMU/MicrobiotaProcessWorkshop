@@ -31,17 +31,17 @@ Specifically, we will demonstrate how to perform downstream analysis
 
 ## Time outline
 
-## | Activity | Time |
-
-overview of Amplicon-Seq | 3m |  
-pipeline of Amplicon-Seq analysis | 4m |  
-Downstream analysis | 10m |  
-    \* rarefraction curve | |  
-    \* Alpha and beta analysis | |  
-    \* Biomarker discovery | |  
-      etc | |  
-Hands-on demonstration | 20m |  
-Q/A section | 5m |
+| Activity                          | Time |
+| --------------------------------- | ---- |
+| overview of Amplicon-Seq          | 3m   |
+| pipeline of Amplicon-Seq analysis | 4m   |
+| Downstream analysis               | 10m  |
+| \* rarefraction curve             |      |
+| \* Alpha and beta analysis        |      |
+| \* Biomarker discovery            |      |
+| etc                               |      |
+| Hands-on demonstration            | 20m  |
+| Q/A section                       | 5m   |
 
 # Workshop goals and objectives
 
