@@ -25,7 +25,8 @@ Suggests:
     ggtree,
     tidyverse,
     RColorBrewer,
-    patchwork 
+    patchwork,
+    pkgdown 
 URL: https://xiangpin.github.io/MicrobiotaProcessWorkshop/
 BugReports: https://github.com/xiangpin/MicrobiotaProcessWorkshop/issues
 VignetteBuilder: knitr
