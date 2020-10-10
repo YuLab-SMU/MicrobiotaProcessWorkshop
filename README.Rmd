@@ -49,10 +49,10 @@ This workshop focuses on the bioinformatics analysis of `microbiome`. Specifical
 | overview of Amplicon-Seq           |  3m  |
 | pipeline of Amplicon-Seq analysis  |  4m  |
 | Downstream analysis                | 10m  |
-|     * rarefraction curve           |      |
-|     * Alpha and beta analysis      |      |
-|     * Biomarker discovery          |      |
-|       etc                          |      |
+|    + rarefraction curve            |      |
+|    + Alpha and beta analysis       |      |
+|    + Biomarker discovery           |      |
+|    + etc.                          |      |
 | Hands-on demonstration             | 20m  |
 | Q/A section                        |  5m  |
 
@@ -74,4 +74,6 @@ This workshop focuses on the bioinformatics analysis of `microbiome`. Specifical
 
 * pkgdown website that contains all workshop materials:
 https://xiangpin.github.io/MicrobiotaProcessWorkshop/
++ some vignettes of online:
+https://yulab-smu.top/treedata-book/chapter11.html#MicrobiotaProcess https://yulab-smu.top/treedata-book/related-tools.html
 * GitHub Action build status badge: ![.github/workflows/basic_checks.yaml](https://github.com/xiangpin/MicrobiotaProcessWorkshop/workflows/.github/workflows/basic_checks.yaml/badge.svg)

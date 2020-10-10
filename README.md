@@ -36,10 +36,10 @@ Specifically, we will demonstrate how to perform downstream analysis
 | overview of Amplicon-Seq          | 3m   |
 | pipeline of Amplicon-Seq analysis | 4m   |
 | Downstream analysis               | 10m  |
-| \* rarefraction curve             |      |
-| \* Alpha and beta analysis        |      |
-| \* Biomarker discovery            |      |
-| etc                               |      |
+| \+ rarefraction curve             |      |
+| \+ Alpha and beta analysis        |      |
+| \+ Biomarker discovery            |      |
+| \+ etc.                           |      |
 | Hands-on demonstration            | 20m  |
 | Q/A section                       | 5m   |
 
@@ -62,5 +62,8 @@ Specifically, we will demonstrate how to perform downstream analysis
 
   - pkgdown website that contains all workshop materials:
     <https://xiangpin.github.io/MicrobiotaProcessWorkshop/>
+  - some vignettes of online:
+    <https://yulab-smu.top/treedata-book/chapter11.html#MicrobiotaProcess>
+    <https://yulab-smu.top/treedata-book/related-tools.html>
   - GitHub Action build status badge:
     ![.github/workflows/basic\_checks.yaml](https://github.com/xiangpin/MicrobiotaProcessWorkshop/workflows/.github/workflows/basic_checks.yaml/badge.svg)
