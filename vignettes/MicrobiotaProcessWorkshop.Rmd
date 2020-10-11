@@ -1,5 +1,5 @@
 ---
-title: "The workshop of analysis of microbiome dataset using MicrobiotaProcess"
+title: "Workshop of microbiome dataset analysis using MicrobiotaProcess"
 bibliography: MicrobiotaProcessWorkshop.bib
 biblio-style: apalike
 output:
