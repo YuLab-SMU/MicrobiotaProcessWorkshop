@@ -15,18 +15,18 @@ Imports:
     MicrobiotaProcess,
     phyloseq,
     ggplot2,
-    vegan
 Suggests: 
     knitr,
     svglite,
-    bookdown,
     rmarkdown,
     coin,
     ggtree,
     tidyverse,
     RColorBrewer,
     patchwork,
-    pkgdown 
+    kableExtra,
+    pkgdown,
+    vegan 
 URL: https://yulab-smu.top/MicrobiotaProcessWorkshop
 BugReports: https://github.com/YuLab-SMU/MicrobiotaProcessWorkshop/issues
 VignetteBuilder: knitr

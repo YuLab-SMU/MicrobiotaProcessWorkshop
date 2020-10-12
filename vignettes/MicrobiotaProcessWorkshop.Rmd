@@ -97,6 +97,7 @@ ps
 ### Other import
 
 ```{r, echo=FALSE, results='asis'}
+
 x <- "MicrobiotaProcess\timport_qiime2\tImport function to load the output of qiime2\n
 phyloseq\timport_biom\tImport phyloseq data from biom-format file\n
 phyloseq\timport_qiime\tImport function to read the now legacy-format QIIME OTU table\n

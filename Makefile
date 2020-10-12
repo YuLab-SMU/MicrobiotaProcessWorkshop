@@ -15,3 +15,6 @@ update:
 
 rd:
 	Rscript -e 'rmarkdown::render("README.Rmd")'
+
+check:
+	Rscript -e 'rcmdcheck::rcmdcheck()'
