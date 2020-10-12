@@ -73,7 +73,8 @@
 
       
 
-      </header><script src="MicrobiotaProcessWorkshop_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="MicrobiotaProcessWorkshop_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="MicrobiotaProcessWorkshop_files/kePrint-0.0.1/kePrint.js"></script><link href="MicrobiotaProcessWorkshop_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Workshop of microbiome dataset analysis using MicrobiotaProcess</h1>
@@ -95,6 +96,7 @@
     <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://dx.plos.org/10.1371/journal.pone.0061217">phyloseq</a></span><span class="op">)</span>
     <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
     <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org">vegan</a></span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span></pre></div>
 <p>Here, we use the 43 pediatric IBD stool samples as example, obtained from the Integrative Human Microbiome Project Consortium (iHMP).</p>
 </div>
@@ -130,12 +132,110 @@
 <span class="co">#&gt; sample_data() Sample Data:       [ 41 samples by 1 sample variables ]</span>
 <span class="co">#&gt; tax_table()   Taxonomy Table:    [ 1432 taxa by 7 taxonomic ranks ]</span>
 <span class="co">#&gt; refseq()      DNAStringSet:      [ 1432 reference sequences ]</span></pre></div>
+<div id="other-import" class="section level3">
+<h3 class="hasAnchor">
+<a href="#other-import" class="anchor"></a>Other import</h3>
+<table class="table table">
+<caption>
+List of import function
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Package
+</th>
+<th style="text-align:left;">
+Import Function
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+MicrobiotaProcess
+</td>
+<td style="text-align:left;">
+import_qiime2
+</td>
+<td style="text-align:left;">
+Import function to load the output of qiime2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="5">
+phyloseq
+</td>
+<td style="text-align:left;">
+import_biom
+</td>
+<td style="text-align:left;">
+Import phyloseq data from biom-format file
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+import_qiime
+</td>
+<td style="text-align:left;">
+Import function to read the now legacy-format QIIME OTU table
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+import_RDP_otu
+</td>
+<td style="text-align:left;">
+Import new RDP OTU-table format
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+import_uparse
+</td>
+<td style="text-align:left;">
+Import UPARSE file format
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+import_mothur
+</td>
+<td style="text-align:left;">
+General function for importing mothur data files into phyloseq
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+base
+</td>
+<td style="text-align:left;">
+read.table or read.csv
+</td>
+<td style="text-align:left;">
+import table
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="co"># We also can use phyloseq to build phyloseq object.</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://dx.plos.org/10.1371/journal.pone.0061217">phyloseq</a></span><span class="op">)</span>
+<span class="va">ps2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/phyloseq.html">phyloseq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/otu_table-methods.html">otu_table</a></span><span class="op">(</span><span class="va">otuda</span>, taxa_are_rows<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/sample_data-methods.html">sample_data</a></span><span class="op">(</span><span class="va">sampleda</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/tax_table-methods.html">tax_table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">taxda</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">ps2</span></pre></div>
+<details><p><summary>output</summary></p>
+<pre><code>#&gt; phyloseq-class experiment-level object
+#&gt; otu_table()   OTU Table:         [ 1681 taxa and 43 samples ]
+#&gt; sample_data() Sample Data:       [ 43 samples by 1 sample variables ]
+#&gt; tax_table()   Taxonomy Table:    [ 1681 taxa by 7 taxonomic ranks ]</code></pre>
+</details>
+</div>
 </div>
 <div id="example-of-rarefaction-visualization" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-of-rarefaction-visualization" class="anchor"></a>Example of rarefaction visualization</h2>
 <p>Rarefaction, based on sampling technique, was used to compensate for the effect of sample size on the number of units observed in a sample. <code>MicrobiotaProcess</code> provided <code>ggrarecurve</code> to plot the curves, based on <code>rrarefy</code> of <code>vegan</code></p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
+<div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/YuLab-SMU/MicrobiotaProcess/">MicrobiotaProcess</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
 <span class="co"># for reproducibly random number</span>
@@ -167,7 +267,7 @@ Example of rarefaction curve of samples
 <h2 class="hasAnchor">
 <a href="#example-of-calculate-alpha-index-and-visualization" class="anchor"></a>Example of calculate alpha index and visualization</h2>
 <p>Alpha index can evaluate the richness and abundance of microbial communities. <code>MicrobiotaProcess</code> provides <code>get_alphaindex</code> to calculate alpha index. Six common diversity measures (<em>Observe</em>, <em>Chao1</em>, <em>ACE</em>, <em>Shannon</em>, <em>Simpson</em>, <em>J</em>) are supported. And the different groups of samples can be tested and visualize by <code>ggbox</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
+<div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/YuLab-SMU/MicrobiotaProcess/">MicrobiotaProcess</a></span><span class="op">)</span>
 <span class="va">alphaobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/get_alphaindex.html">get_alphaindex</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">alphaobj</span><span class="op">)</span><span class="op">)</span>
@@ -177,10 +277,11 @@ Example of rarefaction curve of samples
 <span class="co">#&gt; S206702      38  39.5000  39.31896 0.509799 0.1502078 0.1401476      CD</span>
 <span class="co">#&gt; S206703     156 157.6667 157.89265 3.507910 0.9104597 0.6946554 Control</span>
 <span class="co">#&gt; S206704     155 160.0000 157.08120 3.946515 0.9642167 0.7825068 Control</span>
-<span class="co">#&gt; S206708     113 118.0000 114.51622 2.747711 0.8443571 0.5812324      CD</span>
+<span class="co">#&gt; S206708     113 118.0000 114.51622 2.747711 0.8443571 0.5812324      CD</span></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="va">p_alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/ggbox.html">ggbox</a></span><span class="op">(</span><span class="va">alphaobj</span>, geom<span class="op">=</span><span class="st">"violin"</span>, factorNames<span class="op">=</span><span class="st">"Group"</span><span class="op">)</span> <span class="op">+</span>
            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AED7"</span>, <span class="st">"#FD9347"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
-       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>strip.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>colour<span class="op">=</span><span class="cn">NA</span>, fill<span class="op">=</span><span class="st">"grey"</span><span class="op">)</span><span class="op">)</span>
+           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>strip.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>colour<span class="op">=</span><span class="cn">NA</span>, fill<span class="op">=</span><span class="st">"grey"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">p_alpha</span></pre></div>
 <div class="figure">
 <img src="MicrobiotaProcessWorkshop_files/figure-html/alphatest-1.png" alt="\label{fig:Alphabox}Example of alpha box of samples" width="768"><p class="caption">
@@ -192,7 +293,7 @@ Example of alpha box of samples
 <h2 class="hasAnchor">
 <a href="#example-of-visualization-of-taxonomy-abundance" class="anchor"></a>Example of visualization of taxonomy abundance</h2>
 <p><code>MicrobiotaProcess</code> presents the <code>ggbartax</code> for the visualization of composition of microbial communities. If you want to get the abundance of specific levels of class, You can use <code>get_taxadf</code> then use <code>ggbartax</code> to visualize.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
+<div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/YuLab-SMU/MicrobiotaProcess/">MicrobiotaProcess</a></span><span class="op">)</span>
 
@@ -210,7 +311,7 @@ Example of taxonomic abundance of samples
 </p>
 </div>
 <p>If you want to view the count of taxonomy, you can set the <code>count</code> parameter of <code>ggbartax</code> to <code>TRUE</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
+<div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="va">pclass2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/ggbartax.html">ggbartax</a></span><span class="op">(</span>obj<span class="op">=</span><span class="va">classtaxa</span>, count<span class="op">=</span><span class="cn">TRUE</span>, facetNames<span class="op">=</span><span class="st">"Group"</span><span class="op">)</span> <span class="op">+</span>
           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span>
           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"count reads"</span><span class="op">)</span> <span class="op">+</span>
@@ -227,7 +328,7 @@ Example of taxonomic abundance (Count) of samples
 <h2 class="hasAnchor">
 <a href="#example-of-pca-and-pcoa-analysis" class="anchor"></a>Example of PCA and PCoA analysis</h2>
 <p><code>PCA</code> (Principal component analysis) and <code>PCoA</code> (Principal Coordinate Analysis) are general statistical procedures to compare groups of samples. And <code>PCoA</code> can based on the phylogenetic or count-based distance metrics, such as <code>Bray-Curtis</code>, <code>Jaccard</code>, <code>Unweighted-UniFrac</code> and <code>weighted-UniFrac</code>. <code>MicrobiotaProcess</code> presents the <code>get_pca</code>, <code>get_pcoa</code> and <code>ggordpoint</code> for the analysis.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
+<div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/YuLab-SMU/MicrobiotaProcess/">MicrobiotaProcess</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
 <span class="co"># If the input was normalized, the method parameter should be setted NULL.</span>
@@ -237,7 +338,7 @@ Example of taxonomic abundance (Count) of samples
                       factorNames<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Group"</span><span class="op">)</span>, ellipse<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AED7"</span>, <span class="st">"#FD9347"</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># pc = c(1, 3) to show the first and third principal components.</span>
-<span class="va">pcaplot2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/ggordpoint.html">ggordpoint</a></span><span class="op">(</span>obj<span class="op">=</span><span class="va">pcares</span>, pc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>, biplot<span class="op">=</span><span class="cn">TRUE</span>, speciesannot<span class="op">=</span><span class="cn">TRUE</span>,
+<span class="va">pcaplot2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/ggordpoint.html">ggordpoint</a></span><span class="op">(</span>obj<span class="op">=</span><span class="va">pcares</span>, pc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, biplot<span class="op">=</span><span class="cn">TRUE</span>, speciesannot<span class="op">=</span><span class="cn">TRUE</span>,
                        factorNames<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Group"</span><span class="op">)</span>, ellipse<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AED7"</span>, <span class="st">"#FD9347"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">pcaplot1</span> <span class="op">|</span> <span class="va">pcaplot2</span></pre></div>
@@ -250,7 +351,7 @@ Example of PCA of samples
 <div id="example-of-pcoa-analysis" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-of-pcoa-analysis" class="anchor"></a>Example of PCoA analysis</h2>
-<div class="sourceCode" id="cb8"><pre class="downlit">
+<div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="va">pcoares</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/get_pcoa.html">get_pcoa</a></span><span class="op">(</span>obj<span class="op">=</span><span class="va">ps</span>, distmethod<span class="op">=</span><span class="st">"bray"</span>, method<span class="op">=</span><span class="st">"hellinger"</span><span class="op">)</span>
 <span class="co"># Visualizing the result</span>
 <span class="va">pcoaplot1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/ggordpoint.html">ggordpoint</a></span><span class="op">(</span>obj<span class="op">=</span><span class="va">pcoares</span>, biplot<span class="op">=</span><span class="cn">TRUE</span>, speciesannot<span class="op">=</span><span class="cn">TRUE</span>,
@@ -266,12 +367,31 @@ Example of PCA of samples
 Example of PCoA of samples
 </p>
 </div>
+<div id="permutational-multivariate-analysis-of-variance" class="section level3">
+<h3 class="hasAnchor">
+<a href="#permutational-multivariate-analysis-of-variance" class="anchor"></a>Permutational Multivariate Analysis of Variance</h3>
+<p>We also can perform the Permutational Multivariate Analysis of Variance using the <code>vegan</code></p>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="va">distme</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/get_dist.html">get_dist</a></span><span class="op">(</span><span class="va">ps</span>, distmethod <span class="op">=</span><span class="st">"bray"</span>, method<span class="op">=</span><span class="st">"hellinger"</span><span class="op">)</span>
+<span class="va">sampleda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">ps</span><span class="op">@</span><span class="va">sam_data</span>, check.names<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">sampleda</span> <span class="op">&lt;-</span> <span class="va">sampleda</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">distme</span><span class="op">)</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">sampleda</span><span class="op">)</span><span class="op">)</span>,,drop<span class="op">=</span><span class="cn">FALSE</span><span class="op">]</span>
+<span class="va">sampleda</span><span class="op">$</span><span class="va">Group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">sampleda</span><span class="op">$</span><span class="va">Group</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1024</span><span class="op">)</span>
+<span class="va">adores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/adonis.html">adonis</a></span><span class="op">(</span><span class="va">distme</span> <span class="op">~</span> <span class="va">Group</span>, data<span class="op">=</span><span class="va">sampleda</span>, permutation<span class="op">=</span><span class="fl">9999</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">adores</span><span class="op">$</span><span class="va">aov.tab</span><span class="op">)</span></pre></div>
+<details><p><summary>output</summary></p>
+<pre><code>#&gt;           Df  SumsOfSqs   MeanSqs  F.Model         R2 Pr..F.
+#&gt; Group      1  0.7645291 0.7645291 3.199178 0.07581139  1e-04
+#&gt; Residuals 39  9.3200922 0.2389767       NA 0.92418861     NA
+#&gt; Total     40 10.0846214        NA       NA 1.00000000     NA</code></pre>
+</details>
+</div>
 </div>
 <div id="example-of-hierarchical-cluster-analysis-of-samples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-of-hierarchical-cluster-analysis-of-samples" class="anchor"></a>Example of hierarchical cluster analysis of samples</h2>
 <p><code>beta diversity</code> metrics can assess the differences between microbial communities. It can be visualized with <code>PCA</code> or <code>PCoA</code>, this can also be visualized with hierarchical clustering. <code>MicrobiotaProcess</code> implements the analysis based on <code>ggtree</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
+<div class="sourceCode" id="cb14"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/YuLab-SMU/MicrobiotaProcess/">MicrobiotaProcess</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/treedata-book/">ggtree</a></span><span class="op">)</span>
@@ -305,7 +425,7 @@ Example of hierarchical clustering of samples
 <h2 class="hasAnchor">
 <a href="#example-of-biomarker-discovery" class="anchor"></a>Example of biomarker discovery</h2>
 <p>This package provides <code>diff_analysis</code> to detect the biomarker. And the results can be visualized by <code>ggdiffbox</code>, <code>ggdiffclade</code>, <code>ggeffectsize</code> and <code>ggdifftaxbar</code></p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
+<div class="sourceCode" id="cb15"><pre class="downlit">
 <span class="co"># for the kruskal_test and wilcox_test</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://coin.r-forge.r-project.org">coin</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/YuLab-SMU/MicrobiotaProcess/">MicrobiotaProcess</a></span><span class="op">)</span>
@@ -336,7 +456,7 @@ Example of hierarchical clustering of samples
 <a href="#example-of-visualization-of-different-results-by-ggdiffclade" class="anchor"></a>Example of visualization of different results by <code>ggdiffclade</code>
 </h2>
 <p>The color of discriminative taxa represent the taxa is more abundant in the corresponding group. The point size shows the negative logarithms (base 10) of pvalue. The bigger size of point shows more significant (lower pvalue), the pvalue was calculated in the first step test.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
+<div class="sourceCode" id="cb16"><pre class="downlit">
 <span class="va">diffclade_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/ggdiffclade.html">ggdiffclade</a></span><span class="op">(</span>
                    obj<span class="op">=</span><span class="va">deres</span>, 
                    alpha<span class="op">=</span><span class="fl">0.3</span>, 
@@ -376,7 +496,7 @@ Example of different biomarker clade
 <a href="#example-of-visualization-of-different-results-by-ggdiffbox" class="anchor"></a>Example of visualization of different results by <code>ggdiffbox</code>
 </h2>
 <p>The left panel represents the relative abundance or abundance (according the standard_method) of biomarker, the right panel represents the confident interval of effect size (LDA or MDA) of biomarker. The bigger confident interval shows that the biomarker is more fluctuant, owing to the influence of samples number.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit">
+<div class="sourceCode" id="cb17"><pre class="downlit">
 <span class="va">diffbox</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/ggdiffbox.html">ggdiffbox</a></span><span class="op">(</span>obj<span class="op">=</span><span class="va">deres</span>, box_notch<span class="op">=</span><span class="cn">FALSE</span>, 
              colorlist<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AED7"</span>, <span class="st">"#FD9347"</span><span class="op">)</span>, l_xlabtext<span class="op">=</span><span class="st">"relative abundance"</span><span class="op">)</span>
 <span class="va">diffbox</span></pre></div>
@@ -391,7 +511,7 @@ Example of biomarker boxplot and effect size
 <a href="#example-of-visualization-of-different-results-by-ggdifftaxbar" class="anchor"></a>Example of visualization of different results by <code>ggdifftaxbar</code>
 </h2>
 <p><code>ggdifftaxbar</code> can visualize the abundance of biomarker in each samples of groups, the mean and median abundance of groups or subgroups are also showed. <code>output</code> parameter is the directory of output.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit">
+<div class="sourceCode" id="cb18"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/ggdifftaxbar.html">ggdifftaxbar</a></span><span class="op">(</span>obj<span class="op">=</span><span class="va">deres</span>, xtextsize<span class="op">=</span><span class="fl">1.5</span>, 
              output<span class="op">=</span><span class="st">"IBD_biomarkder_barplot"</span>,
              coloslist<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AED7"</span>, <span class="st">"#FD9347"</span><span class="op">)</span><span class="op">)</span></pre></div>
@@ -401,11 +521,11 @@ Example of biomarker boxplot and effect size
 <a href="#example-of-visualization-of-different-results-by-ggeffectsize" class="anchor"></a>Example of visualization of different results by <code>ggeffectsize</code>
 </h2>
 <p>The result is similar with the result of <code>ggdiffbox</code>, the bigger confident interval shows that the biomarker is more fluctuant owing to the influence of samples number.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit">
+<div class="sourceCode" id="cb19"><pre class="downlit">
 <span class="va">es_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/ggeffectsize.html">ggeffectsize</a></span><span class="op">(</span>obj<span class="op">=</span><span class="va">deres</span>, 
                      lineheight<span class="op">=</span><span class="fl">0.1</span>,
                      linewidth<span class="op">=</span><span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span> 
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AED7"</span>, 
+        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AED7"</span>, 
                                     <span class="st">"#FD9347"</span><span class="op">)</span><span class="op">)</span> 
 
 <span class="va">es_p</span></pre></div>
@@ -419,6 +539,7 @@ Example of effect size of biomarker
 <h2 class="hasAnchor">
 <a href="#session-information" class="anchor"></a>Session information</h2>
 <p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> on the system on which this document was compiled:</p>
+<details><p><summary>output</summary></p>
 <pre><code>#&gt; R version 4.0.2 (2020-06-22)
 #&gt; Platform: x86_64-pc-linux-gnu (64-bit)
 #&gt; Running under: Ubuntu 20.04 LTS
@@ -439,55 +560,57 @@ Example of effect size of biomarker
 #&gt; 
 #&gt; other attached packages:
 #&gt;  [1] gdtools_0.2.2            coin_1.3-1               survival_3.1-12         
-#&gt;  [4] ggtree_2.3.7             patchwork_1.0.1          forcats_0.5.0           
-#&gt;  [7] stringr_1.4.0            dplyr_1.0.2              purrr_0.3.4             
-#&gt; [10] readr_1.4.0              tidyr_1.1.2              tibble_3.0.3            
-#&gt; [13] tidyverse_1.3.0          ggplot2_3.3.2            phyloseq_1.33.0         
-#&gt; [16] MicrobiotaProcess_1.1.10
+#&gt;  [4] ggtree_2.3.7             patchwork_1.0.1          kableExtra_1.2.1        
+#&gt;  [7] vegan_2.5-6              lattice_0.20-41          permute_0.9-5           
+#&gt; [10] forcats_0.5.0            stringr_1.4.0            dplyr_1.0.2             
+#&gt; [13] purrr_0.3.4              readr_1.4.0              tidyr_1.1.2             
+#&gt; [16] tibble_3.0.4             tidyverse_1.3.0          ggplot2_3.3.2           
+#&gt; [19] phyloseq_1.33.0          MicrobiotaProcess_1.1.10
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] TH.data_1.0-10      colorspace_1.4-1    ggsignif_0.6.0     
-#&gt;   [4] ellipsis_0.3.1      modeltools_0.2-23   rprojroot_1.3-2    
-#&gt;   [7] XVector_0.29.3      fs_1.5.0            aplot_0.0.6        
-#&gt;  [10] rstudioapi_0.11     farver_2.0.3        ggrepel_0.8.2      
-#&gt;  [13] bit64_4.0.5         fansi_0.4.1         lubridate_1.7.9    
-#&gt;  [16] mvtnorm_1.1-1       xml2_1.3.2          codetools_0.2-16   
-#&gt;  [19] splines_4.0.2       libcoin_1.0-6       knitr_1.30         
-#&gt;  [22] ade4_1.7-15         jsonlite_1.7.1      broom_0.7.1        
-#&gt;  [25] cluster_2.1.0       dbplyr_1.4.4        httr_1.4.2         
-#&gt;  [28] BiocManager_1.30.10 rentrez_1.2.2       compiler_4.0.2     
-#&gt;  [31] rvcheck_0.1.8       backports_1.1.10    assertthat_0.2.1   
-#&gt;  [34] Matrix_1.2-18       lazyeval_0.2.2      cli_2.0.2          
-#&gt;  [37] htmltools_0.5.0     tools_4.0.2         igraph_1.2.6       
-#&gt;  [40] gtable_0.3.0        glue_1.4.2          reshape2_1.4.4     
-#&gt;  [43] fastmatch_1.1-0     Rcpp_1.0.5          Biobase_2.49.1     
-#&gt;  [46] cellranger_1.1.0    pkgdown_1.6.1       vctrs_0.3.4        
-#&gt;  [49] Biostrings_2.57.2   rhdf5filters_1.1.3  multtest_2.45.0    
-#&gt;  [52] svglite_1.2.3.2     ape_5.4-1           nlme_3.1-148       
-#&gt;  [55] DECIPHER_2.17.1     iterators_1.0.12    xfun_0.18          
-#&gt;  [58] Rmisc_1.5           rvest_0.3.6         lifecycle_0.2.0    
-#&gt;  [61] phangorn_2.5.5      gtools_3.8.2        XML_3.99-0.5       
-#&gt;  [64] zlibbioc_1.35.0     MASS_7.3-51.6       zoo_1.8-8          
-#&gt;  [67] scales_1.1.1        hms_0.5.3           ragg_0.4.0         
-#&gt;  [70] parallel_4.0.2      biomformat_1.17.0   sandwich_3.0-0     
-#&gt;  [73] rhdf5_2.33.11       RColorBrewer_1.1-2  yaml_2.2.1         
-#&gt;  [76] memoise_1.1.0       reshape_0.8.8       stringi_1.5.3      
-#&gt;  [79] RSQLite_2.2.1       highr_0.8           S4Vectors_0.27.14  
-#&gt;  [82] desc_1.2.0          foreach_1.5.0       randomForest_4.6-14
-#&gt;  [85] tidytree_0.3.3      permute_0.9-5       BiocGenerics_0.35.4
-#&gt;  [88] rlang_0.4.8         pkgconfig_2.0.3     systemfonts_0.3.2  
-#&gt;  [91] matrixStats_0.57.0  evaluate_0.14       lattice_0.20-41    
-#&gt;  [94] Rhdf5lib_1.11.3     labeling_0.3        treeio_1.13.1      
-#&gt;  [97] bit_4.0.4           tidyselect_1.1.0    plyr_1.8.6         
-#&gt; [100] magrittr_1.5        bookdown_0.20       R6_2.4.1           
-#&gt; [103] IRanges_2.23.10     generics_0.0.2      multcomp_1.4-14    
-#&gt; [106] DBI_1.1.0           haven_2.3.1         pillar_1.4.6       
-#&gt; [109] withr_2.3.0         mgcv_1.8-31         modelr_0.1.8       
-#&gt; [112] crayon_1.3.4        rmarkdown_2.4       readxl_1.3.1       
-#&gt; [115] grid_4.0.2          data.table_1.13.0   blob_1.2.1         
-#&gt; [118] vegan_2.5-6         reprex_0.3.0        digest_0.6.25      
-#&gt; [121] textshaping_0.1.2   stats4_4.0.2        munsell_0.5.0      
-#&gt; [124] quadprog_1.5-8</code></pre>
+#&gt;   [1] readxl_1.3.1        backports_1.1.10    fastmatch_1.1-0    
+#&gt;   [4] systemfonts_0.3.2   plyr_1.8.6          igraph_1.2.6       
+#&gt;   [7] selectr_0.4-2       lazyeval_0.2.2      splines_4.0.2      
+#&gt;  [10] TH.data_1.0-10      digest_0.6.25       foreach_1.5.0      
+#&gt;  [13] htmltools_0.5.0     fansi_0.4.1         magrittr_1.5       
+#&gt;  [16] memoise_1.1.0       cluster_2.1.0       DECIPHER_2.17.1    
+#&gt;  [19] Biostrings_2.57.2   modelr_0.1.8        matrixStats_0.57.0 
+#&gt;  [22] svglite_1.2.3.2     sandwich_3.0-0      pkgdown_1.6.1      
+#&gt;  [25] colorspace_1.4-1    blob_1.2.1          rvest_0.3.6        
+#&gt;  [28] ggrepel_0.8.2       textshaping_0.1.2   haven_2.3.1        
+#&gt;  [31] xfun_0.18           crayon_1.3.4        jsonlite_1.7.1     
+#&gt;  [34] libcoin_1.0-6       zoo_1.8-8           phangorn_2.5.5     
+#&gt;  [37] iterators_1.0.12    ape_5.4-1           glue_1.4.2         
+#&gt;  [40] gtable_0.3.0        zlibbioc_1.35.0     XVector_0.29.3     
+#&gt;  [43] webshot_0.5.2       Rhdf5lib_1.11.3     BiocGenerics_0.35.4
+#&gt;  [46] rentrez_1.2.2       scales_1.1.1        mvtnorm_1.1-1      
+#&gt;  [49] DBI_1.1.0           Rcpp_1.0.5          viridisLite_0.3.0  
+#&gt;  [52] tidytree_0.3.3      bit_4.0.4           stats4_4.0.2       
+#&gt;  [55] httr_1.4.2          RColorBrewer_1.1-2  modeltools_0.2-23  
+#&gt;  [58] ellipsis_0.3.1      pkgconfig_2.0.3     reshape_0.8.8      
+#&gt;  [61] XML_3.99-0.5        farver_2.0.3        dbplyr_1.4.4       
+#&gt;  [64] tidyselect_1.1.0    labeling_0.3        rlang_0.4.8        
+#&gt;  [67] reshape2_1.4.4      munsell_0.5.0       cellranger_1.1.0   
+#&gt;  [70] tools_4.0.2         cli_2.1.0           generics_0.0.2     
+#&gt;  [73] RSQLite_2.2.1       ade4_1.7-15         broom_0.7.1        
+#&gt;  [76] evaluate_0.14       biomformat_1.17.0   yaml_2.2.1         
+#&gt;  [79] ragg_0.4.0          knitr_1.30          bit64_4.0.5        
+#&gt;  [82] fs_1.5.0            randomForest_4.6-14 nlme_3.1-148       
+#&gt;  [85] aplot_0.0.6         xml2_1.3.2          compiler_4.0.2     
+#&gt;  [88] rstudioapi_0.11     ggsignif_0.6.0      reprex_0.3.0       
+#&gt;  [91] treeio_1.13.1       stringi_1.5.3       highr_0.8          
+#&gt;  [94] ps_1.4.0            desc_1.2.0          Matrix_1.2-18      
+#&gt;  [97] multtest_2.45.0     vctrs_0.3.4         pillar_1.4.6       
+#&gt; [100] lifecycle_0.2.0     rhdf5filters_1.1.3  BiocManager_1.30.10
+#&gt; [103] data.table_1.13.0   R6_2.4.1            Rmisc_1.5          
+#&gt; [106] IRanges_2.23.10     codetools_0.2-16    MASS_7.3-51.6      
+#&gt; [109] gtools_3.8.2        assertthat_0.2.1    rhdf5_2.33.11      
+#&gt; [112] rprojroot_1.3-2     withr_2.3.0         multcomp_1.4-14    
+#&gt; [115] S4Vectors_0.27.14   mgcv_1.8-31         parallel_4.0.2     
+#&gt; [118] hms_0.5.3           quadprog_1.5-8      grid_4.0.2         
+#&gt; [121] rmarkdown_2.4       rvcheck_0.1.8       Biobase_2.49.1     
+#&gt; [124] lubridate_1.7.9</code></pre>
+</details>
 </div>
 <div id="reference" class="section level2">
 <h2 class="hasAnchor">
