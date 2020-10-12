@@ -61,9 +61,9 @@ Specifically, we will demonstrate how to perform downstream analysis
 ## Useful links
 
   - pkgdown website that contains all workshop materials:
-    <https://xiangpin.github.io/MicrobiotaProcessWorkshop/>
+    <https://yulab-smu.top/MicrobiotaProcessWorkshop>
   - some vignettes of online:
     <https://yulab-smu.top/treedata-book/chapter11.html#MicrobiotaProcess>
     <https://yulab-smu.top/treedata-book/related-tools.html>
   - GitHub Action build status badge:
-    ![.github/workflows/basic\_checks.yaml](https://github.com/xiangpin/MicrobiotaProcessWorkshop/workflows/.github/workflows/basic_checks.yaml/badge.svg)
+    ![.github/workflows/basic\_checks.yaml](https://github.com/YuLab-SMU/MicrobiotaProcessWorkshop/workflows/.github/workflows/basic_checks.yaml/badge.svg)

@@ -27,7 +27,6 @@ Suggests:
     RColorBrewer,
     patchwork,
     pkgdown 
-URL: https://xiangpin.github.io/MicrobiotaProcessWorkshop/
-BugReports: https://github.com/xiangpin/MicrobiotaProcessWorkshop/issues
+URL: https://yulab-smu.top/MicrobiotaProcessWorkshop
+BugReports: https://github.com/YuLab-SMU/MicrobiotaProcessWorkshop/issues
 VignetteBuilder: knitr
-DockerImage: xushuangbin/microbiotaprocess_workshop:latest
