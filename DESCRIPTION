@@ -26,7 +26,10 @@ Suggests:
     patchwork,
     kableExtra,
     pkgdown,
-    vegan 
+    vegan,
+    reshape2,
+    ggnewscale,
+    WGCNA
 URL: https://yulab-smu.top/MicrobiotaProcessWorkshop
 BugReports: https://github.com/YuLab-SMU/MicrobiotaProcessWorkshop/issues
 VignetteBuilder: knitr
