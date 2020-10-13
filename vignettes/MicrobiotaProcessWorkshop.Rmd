@@ -201,6 +201,40 @@ pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="Group") +
 pclass2
 ```
 
+## Venn or Upset plot
+
+The Venn or UpSet plot can help us to obtain the difference between groups in overview. MicrobiotaProcess provides features to obtain the input of VennDiagram or UpSet package.
+
+```{r, fold.output=FALSE, fold.plot=FALSE, fig.width=6, fig.height=6, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:PCA}Example Venn or Upset plot", Venn}
+vennlist <- get_vennlist(obj=ps, factorNames="Group")
+upsetda <- get_upset(obj=ps, factorNames="Group")
+library(VennDiagram)
+library(UpSetR)
+vennp <- venn.diagram(vennlist,
+                      height=5,
+                      width=5, 
+                      filename=NULL, 
+                      fill=c("#00AED7", "#FD9347"),
+                      cat.col=c("#00AED7", "#FD9347"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.6,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+grid::grid.draw(vennp)
+
+upset(upsetda, sets=unique(as.vector(ps@sam_data$Group)), 
+      sets.bar.color = "#56B4E9",
+      order.by = "freq", 
+      empty.intersections = "on")
+```
+
 ## Example of PCA and PCoA analysis
 
 `PCA` (Principal component analysis) and `PCoA` (Principal Coordinate Analysis) are general statistical procedures to compare groups of samples. And `PCoA` can based on the phylogenetic or count-based distance metrics, such as `Bray-Curtis`, `Jaccard`, `Unweighted-UniFrac` and `weighted-UniFrac`. `MicrobiotaProcess` presents the `get_pca`, `get_pcoa` and `ggordpoint` for the analysis.

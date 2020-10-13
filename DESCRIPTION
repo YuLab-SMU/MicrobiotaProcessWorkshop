@@ -29,6 +29,8 @@ Suggests:
     vegan,
     reshape2,
     ggnewscale,
+    UpSetR,
+    VennDiagram,
     WGCNA
 URL: https://yulab-smu.top/MicrobiotaProcessWorkshop
 BugReports: https://github.com/YuLab-SMU/MicrobiotaProcessWorkshop/issues
