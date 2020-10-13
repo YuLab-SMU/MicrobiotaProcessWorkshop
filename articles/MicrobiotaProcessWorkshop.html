@@ -97,6 +97,9 @@
     <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
     <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
     <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org">vegan</a></span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://coin.r-forge.r-project.org">coin</a></span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hadley/reshape">reshape2</a></span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ggnewscale</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span></pre></div>
 <p>Here, we use the 43 pediatric IBD stool samples as example, obtained from the Integrative Human Microbiome Project Consortium (iHMP).</p>
 </div>
@@ -402,16 +405,18 @@ Example of PCoA of samples
                   layout <span class="op">=</span> <span class="st">"rectangular"</span>,
                   pointsize<span class="op">=</span><span class="fl">1</span>,
                   fontsize<span class="op">=</span><span class="fl">0</span>,
-                  factorNames<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Group"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+                  factorNames<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Group"</span><span class="op">)</span>
+              <span class="op">)</span> <span class="op">+</span>
               <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AED7"</span>, <span class="st">"#FD9347"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-          <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/theme_tree2.html">theme_tree2</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"right"</span>,
+              <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/theme_tree2.html">theme_tree2</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"right"</span>,
               plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face<span class="op">=</span><span class="st">"bold"</span>, lineheight<span class="op">=</span><span class="fl">25</span>,hjust<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># circular layout</span>
 <span class="va">cplot2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/ggclust.html">ggclust</a></span><span class="op">(</span>obj<span class="op">=</span><span class="va">hcsample</span>,
                   layout <span class="op">=</span> <span class="st">"circular"</span>,
-              pointsize<span class="op">=</span><span class="fl">1</span>,
-              fontsize<span class="op">=</span><span class="fl">2</span>,
-             factorNames<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Group"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+                  pointsize<span class="op">=</span><span class="fl">1</span>,
+                  fontsize<span class="op">=</span><span class="fl">2</span>,
+                  factorNames<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Group"</span><span class="op">)</span>
+          <span class="op">)</span> <span class="op">+</span>
           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AED7"</span>, <span class="st">"#FD9347"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"right"</span><span class="op">)</span>
 <span class="va">cplot1</span> <span class="op">|</span> <span class="va">cplot2</span></pre></div>
@@ -465,6 +470,7 @@ Example of hierarchical clustering of samples
                    layout<span class="op">=</span><span class="st">"radial"</span>,
                    taxlevel<span class="op">=</span><span class="fl">3</span>, 
                    removeUnkown<span class="op">=</span><span class="cn">TRUE</span>,
+                   reduce<span class="op">=</span><span class="cn">TRUE</span> <span class="co"># This argument is to remove the branch of unknown taxonomy.</span>
                <span class="op">)</span> <span class="op">+</span>
                <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>
                    values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AED7"</span>, <span class="st">"#FD9347"</span><span class="op">)</span>
@@ -535,6 +541,78 @@ Example of effect size of biomarker
 </p>
 </div>
 </div>
+<div id="correlation-of-taxonomy" class="section level2">
+<h2 class="hasAnchor">
+<a href="#correlation-of-taxonomy" class="anchor"></a>Correlation of taxonomy</h2>
+<p>The result of different analysis also can be visualized with result of correlation.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit">
+<span class="va">genustab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/get_taxadf.html">get_taxadf</a></span><span class="op">(</span><span class="va">ps</span>, taxlevel<span class="op">=</span><span class="fl">6</span><span class="op">)</span>
+<span class="va">genustab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/transpose-methods.html">t</a></span><span class="op">(</span><span class="va">genustab</span><span class="op">@</span><span class="va">otu_table</span><span class="op">)</span>, check.names<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">genustab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">genustab</span>, <span class="fl">2</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="va">x</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, check.names<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+
+<span class="va">cortest</span> <span class="op">&lt;-</span> <span class="fu">WGCNA</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/WGCNA/man/corAndPvalue.html">corAndPvalue</a></span><span class="op">(</span><span class="va">genustab</span>, method<span class="op">=</span><span class="st">"spearman"</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span><span class="op">)</span>
+<span class="va">cortest</span><span class="op">$</span><span class="va">cor</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html">upper.tri</a></span><span class="op">(</span><span class="va">cortest</span><span class="op">$</span><span class="va">cor</span>, diag <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+<span class="va">cortest</span><span class="op">$</span><span class="va">p</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html">upper.tri</a></span><span class="op">(</span><span class="va">cortest</span><span class="op">$</span><span class="va">p</span>, diag <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+<span class="va">cortab1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/reshape2/man/melt.html">melt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/transpose-methods.html">t</a></span><span class="op">(</span><span class="va">cortest</span><span class="op">$</span><span class="va">cor</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">rename</span><span class="op">(</span>from<span class="op">=</span><span class="va">Var1</span>,to<span class="op">=</span><span class="va">Var2</span>,cor<span class="op">=</span><span class="va">value</span><span class="op">)</span>
+<span class="va">corptab1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/reshape2/man/melt.html">melt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/transpose-methods.html">t</a></span><span class="op">(</span><span class="va">cortest</span><span class="op">$</span><span class="va">p</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">rename</span><span class="op">(</span>pvalue<span class="op">=</span><span class="va">value</span><span class="op">)</span>
+<span class="va">cortab1</span><span class="op">$</span><span class="va">fdr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">corptab1</span><span class="op">$</span><span class="va">pvalue</span>, method<span class="op">=</span><span class="st">"fdr"</span><span class="op">)</span>
+
+<span class="va">cortab1</span> <span class="op">&lt;-</span> <span class="va">cortab1</span> <span class="op">%&gt;%</span> <span class="fu">mutate</span><span class="op">(</span>correlation<span class="op">=</span><span class="fu">case_when</span><span class="op">(</span><span class="va">cor</span><span class="op">&gt;</span><span class="fl">0</span> <span class="op">~</span> <span class="st">"positive"</span>,<span class="va">cor</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"negative"</span>,<span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"No"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">cortab2</span> <span class="op">&lt;-</span> <span class="va">cortab1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">fdr</span> <span class="op">&lt;=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">cor</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">|</span> <span class="va">cor</span> <span class="op">&gt;=</span> <span class="fl">0.8</span><span class="op">)</span>
+
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/ggdiffclade.html">ggdiffclade</a></span><span class="op">(</span>
+         obj<span class="op">=</span><span class="va">deres</span>,
+         alpha<span class="op">=</span><span class="fl">0.3</span>,
+         linewd<span class="op">=</span><span class="fl">0.25</span>,
+         skpointsize<span class="op">=</span><span class="fl">0.2</span>,
+         layout<span class="op">=</span><span class="st">"inward_circular"</span>,
+         taxlevel<span class="op">=</span><span class="fl">7</span>,
+         cladetext<span class="op">=</span><span class="fl">0</span>,
+         setColors<span class="op">=</span><span class="cn">FALSE</span>,
+         xlim<span class="op">=</span><span class="fl">16</span>
+     <span class="op">)</span> <span class="op">+</span>
+     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AED7"</span>, <span class="st">"#FD9347"</span><span class="op">)</span>,
+                       guide<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span><span class="op">(</span>keywidth<span class="op">=</span><span class="fl">0.5</span>,
+                                          keyheight<span class="op">=</span><span class="fl">0.5</span>,
+                                          order<span class="op">=</span><span class="fl">3</span>,
+                                          override.aes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+     <span class="op">)</span> <span class="op">+</span>
+     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size_continuous</a></span><span class="op">(</span>range<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>,
+                       guide<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span><span class="op">(</span>keywidth<span class="op">=</span><span class="fl">0.5</span>,keyheight<span class="op">=</span><span class="fl">0.5</span>,order<span class="op">=</span><span class="fl">4</span>,
+                                          override.aes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fl">21</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="fl">100</span><span class="op">)</span>,guide<span class="op">=</span><span class="st">"none"</span><span class="op">)</span>
+
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span>
+      <span class="fu"><a href="https://rdrr.io/pkg/ggnewscale/man/new_scale.html">new_scale_color</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+      <span class="fu"><a href="https://rdrr.io/pkg/ggnewscale/man/new_scale.html">new_scale</a></span><span class="op">(</span><span class="st">"size"</span><span class="op">)</span> <span class="op">+</span>
+      <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/geom_tiplab.html">geom_tiplab</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">1</span>, hjust<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+      <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/geom_taxalink.html">geom_taxalink</a></span><span class="op">(</span>
+          data<span class="op">=</span><span class="va">cortab2</span>,
+          mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>taxa1<span class="op">=</span><span class="va">from</span>,
+                      taxa2<span class="op">=</span><span class="va">to</span>,
+                      colour<span class="op">=</span><span class="va">correlation</span>,
+                      size<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span><span class="op">)</span>,
+          alpha<span class="op">=</span><span class="fl">0.4</span>,
+          ncp<span class="op">=</span><span class="fl">10</span>,
+          hratio<span class="op">=</span><span class="fl">1</span>,
+          offset<span class="op">=</span><span class="fl">1.2</span>
+      <span class="op">)</span> <span class="op">+</span>
+      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size_continuous</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">1</span><span class="op">)</span>,
+                            guide<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span><span class="op">(</span>keywidth<span class="op">=</span><span class="fl">1</span>, keyheight<span class="op">=</span><span class="fl">0.5</span>,
+                                               order<span class="op">=</span><span class="fl">1</span>, override.aes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+      <span class="op">)</span> <span class="op">+</span>
+      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"chocolate2"</span>, <span class="st">"#009E73"</span><span class="op">)</span>,
+                          guide<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span><span class="op">(</span>keywidth<span class="op">=</span><span class="fl">0.5</span>, keyheight<span class="op">=</span><span class="fl">0.5</span>,
+                          order<span class="op">=</span><span class="fl">2</span>, override.aes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">1</span>, size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">p2</span></pre></div>
+<details><p><summary>plot</summary></p>
+<div class="figure" style="text-align: center">
+<img src="MicrobiotaProcessWorkshop_files/figure-html/plotcorAnddiff-1.png" alt="\label{fig:clade}Example of different biomarker clade and correlation of genera" width="576"><p class="caption">
+Example of different biomarker clade and correlation of genera
+</p>
+</div>
+</details>
+</div>
 <div id="session-information" class="section level2">
 <h2 class="hasAnchor">
 <a href="#session-information" class="anchor"></a>Session information</h2>
@@ -559,57 +637,64 @@ Example of effect size of biomarker
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] gdtools_0.2.2            coin_1.3-1               survival_3.1-12         
-#&gt;  [4] ggtree_2.3.7             patchwork_1.0.1          kableExtra_1.2.1        
-#&gt;  [7] vegan_2.5-6              lattice_0.20-41          permute_0.9-5           
-#&gt; [10] forcats_0.5.0            stringr_1.4.0            dplyr_1.0.2             
-#&gt; [13] purrr_0.3.4              readr_1.4.0              tidyr_1.1.2             
-#&gt; [16] tibble_3.0.4             tidyverse_1.3.0          ggplot2_3.3.2           
-#&gt; [19] phyloseq_1.33.0          MicrobiotaProcess_1.1.10
+#&gt;  [1] gdtools_0.2.2            ggtree_2.3.7             patchwork_1.0.1         
+#&gt;  [4] kableExtra_1.2.1         ggnewscale_0.4.3         reshape2_1.4.4          
+#&gt;  [7] coin_1.3-1               survival_3.1-12          vegan_2.5-6             
+#&gt; [10] lattice_0.20-41          permute_0.9-5            forcats_0.5.0           
+#&gt; [13] stringr_1.4.0            dplyr_1.0.2              purrr_0.3.4             
+#&gt; [16] readr_1.4.0              tidyr_1.1.2              tibble_3.0.4            
+#&gt; [19] tidyverse_1.3.0          ggplot2_3.3.2            phyloseq_1.33.0         
+#&gt; [22] MicrobiotaProcess_1.1.10
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] readxl_1.3.1        backports_1.1.10    fastmatch_1.1-0    
-#&gt;   [4] systemfonts_0.3.2   plyr_1.8.6          igraph_1.2.6       
-#&gt;   [7] selectr_0.4-2       lazyeval_0.2.2      splines_4.0.2      
-#&gt;  [10] TH.data_1.0-10      digest_0.6.25       foreach_1.5.0      
-#&gt;  [13] htmltools_0.5.0     fansi_0.4.1         magrittr_1.5       
-#&gt;  [16] memoise_1.1.0       cluster_2.1.0       DECIPHER_2.17.1    
-#&gt;  [19] Biostrings_2.57.2   modelr_0.1.8        matrixStats_0.57.0 
-#&gt;  [22] svglite_1.2.3.2     sandwich_3.0-0      pkgdown_1.6.1      
-#&gt;  [25] colorspace_1.4-1    blob_1.2.1          rvest_0.3.6        
-#&gt;  [28] ggrepel_0.8.2       textshaping_0.1.2   haven_2.3.1        
-#&gt;  [31] xfun_0.18           crayon_1.3.4        jsonlite_1.7.1     
-#&gt;  [34] libcoin_1.0-6       zoo_1.8-8           phangorn_2.5.5     
-#&gt;  [37] iterators_1.0.12    ape_5.4-1           glue_1.4.2         
-#&gt;  [40] gtable_0.3.0        zlibbioc_1.35.0     XVector_0.29.3     
-#&gt;  [43] webshot_0.5.2       Rhdf5lib_1.11.3     BiocGenerics_0.35.4
-#&gt;  [46] rentrez_1.2.2       scales_1.1.1        mvtnorm_1.1-1      
-#&gt;  [49] DBI_1.1.0           Rcpp_1.0.5          viridisLite_0.3.0  
-#&gt;  [52] tidytree_0.3.3      bit_4.0.4           stats4_4.0.2       
-#&gt;  [55] httr_1.4.2          RColorBrewer_1.1-2  modeltools_0.2-23  
-#&gt;  [58] ellipsis_0.3.1      pkgconfig_2.0.3     reshape_0.8.8      
-#&gt;  [61] XML_3.99-0.5        farver_2.0.3        dbplyr_1.4.4       
-#&gt;  [64] tidyselect_1.1.0    labeling_0.3        rlang_0.4.8        
-#&gt;  [67] reshape2_1.4.4      munsell_0.5.0       cellranger_1.1.0   
-#&gt;  [70] tools_4.0.2         cli_2.1.0           generics_0.0.2     
-#&gt;  [73] RSQLite_2.2.1       ade4_1.7-15         broom_0.7.1        
-#&gt;  [76] evaluate_0.14       biomformat_1.17.0   yaml_2.2.1         
-#&gt;  [79] ragg_0.4.0          knitr_1.30          bit64_4.0.5        
-#&gt;  [82] fs_1.5.0            randomForest_4.6-14 nlme_3.1-148       
-#&gt;  [85] aplot_0.0.6         xml2_1.3.2          compiler_4.0.2     
-#&gt;  [88] rstudioapi_0.11     ggsignif_0.6.0      reprex_0.3.0       
-#&gt;  [91] treeio_1.13.1       stringi_1.5.3       highr_0.8          
-#&gt;  [94] ps_1.4.0            desc_1.2.0          Matrix_1.2-18      
-#&gt;  [97] multtest_2.45.0     vctrs_0.3.4         pillar_1.4.6       
-#&gt; [100] lifecycle_0.2.0     rhdf5filters_1.1.3  BiocManager_1.30.10
-#&gt; [103] data.table_1.13.0   R6_2.4.1            Rmisc_1.5          
-#&gt; [106] IRanges_2.23.10     codetools_0.2-16    MASS_7.3-51.6      
-#&gt; [109] gtools_3.8.2        assertthat_0.2.1    rhdf5_2.33.11      
-#&gt; [112] rprojroot_1.3-2     withr_2.3.0         multcomp_1.4-14    
-#&gt; [115] S4Vectors_0.27.14   mgcv_1.8-31         parallel_4.0.2     
-#&gt; [118] hms_0.5.3           quadprog_1.5-8      grid_4.0.2         
-#&gt; [121] rmarkdown_2.4       rvcheck_0.1.8       Biobase_2.49.1     
-#&gt; [124] lubridate_1.7.9</code></pre>
+#&gt;   [1] readxl_1.3.1          backports_1.1.10      Hmisc_4.4-1          
+#&gt;   [4] fastmatch_1.1-0       systemfonts_0.3.2     plyr_1.8.6           
+#&gt;   [7] igraph_1.2.6          selectr_0.4-2         lazyeval_0.2.2       
+#&gt;  [10] splines_4.0.2         TH.data_1.0-10        digest_0.6.25        
+#&gt;  [13] foreach_1.5.0         htmltools_0.5.0       GO.db_3.11.4         
+#&gt;  [16] fansi_0.4.1           checkmate_2.0.0       magrittr_1.5         
+#&gt;  [19] memoise_1.1.0         doParallel_1.0.15     cluster_2.1.0        
+#&gt;  [22] DECIPHER_2.17.1       fastcluster_1.1.25    Biostrings_2.57.2    
+#&gt;  [25] modelr_0.1.8          matrixStats_0.57.0    svglite_1.2.3.2      
+#&gt;  [28] sandwich_3.0-0        pkgdown_1.6.1         jpeg_0.1-8.1         
+#&gt;  [31] colorspace_1.4-1      blob_1.2.1            rvest_0.3.6          
+#&gt;  [34] ggrepel_0.8.2         textshaping_0.1.2     haven_2.3.1          
+#&gt;  [37] xfun_0.18             crayon_1.3.4          jsonlite_1.7.1       
+#&gt;  [40] libcoin_1.0-6         impute_1.63.0         zoo_1.8-8            
+#&gt;  [43] phangorn_2.5.5        iterators_1.0.12      ape_5.4-1            
+#&gt;  [46] glue_1.4.2            gtable_0.3.0          zlibbioc_1.35.0      
+#&gt;  [49] XVector_0.29.3        webshot_0.5.2         Rhdf5lib_1.11.3      
+#&gt;  [52] BiocGenerics_0.35.4   rentrez_1.2.2         scales_1.1.1         
+#&gt;  [55] mvtnorm_1.1-1         DBI_1.1.0             Rcpp_1.0.5           
+#&gt;  [58] htmlTable_2.1.0       viridisLite_0.3.0     tidytree_0.3.3       
+#&gt;  [61] foreign_0.8-80        bit_4.0.4             preprocessCore_1.51.0
+#&gt;  [64] Formula_1.2-3         stats4_4.0.2          htmlwidgets_1.5.2    
+#&gt;  [67] httr_1.4.2            RColorBrewer_1.1-2    modeltools_0.2-23    
+#&gt;  [70] ellipsis_0.3.1        pkgconfig_2.0.3       reshape_0.8.8        
+#&gt;  [73] XML_3.99-0.5          farver_2.0.3          nnet_7.3-14          
+#&gt;  [76] dbplyr_1.4.4          dynamicTreeCut_1.63-1 AnnotationDbi_1.51.3 
+#&gt;  [79] tidyselect_1.1.0      labeling_0.3          rlang_0.4.8          
+#&gt;  [82] munsell_0.5.0         cellranger_1.1.0      tools_4.0.2          
+#&gt;  [85] cli_2.1.0             generics_0.0.2        RSQLite_2.2.1        
+#&gt;  [88] ade4_1.7-15           broom_0.7.1           evaluate_0.14        
+#&gt;  [91] biomformat_1.17.0     yaml_2.2.1            ragg_0.4.0           
+#&gt;  [94] knitr_1.30            bit64_4.0.5           fs_1.5.0             
+#&gt;  [97] randomForest_4.6-14   nlme_3.1-148          aplot_0.0.6          
+#&gt; [100] xml2_1.3.2            compiler_4.0.2        rstudioapi_0.11      
+#&gt; [103] png_0.1-7             ggsignif_0.6.0        reprex_0.3.0         
+#&gt; [106] treeio_1.13.1         stringi_1.5.3         highr_0.8            
+#&gt; [109] ps_1.4.0              desc_1.2.0            Matrix_1.2-18        
+#&gt; [112] multtest_2.45.0       vctrs_0.3.4           pillar_1.4.6         
+#&gt; [115] lifecycle_0.2.0       rhdf5filters_1.1.3    BiocManager_1.30.10  
+#&gt; [118] data.table_1.13.0     latticeExtra_0.6-29   R6_2.4.1             
+#&gt; [121] Rmisc_1.5             gridExtra_2.3         IRanges_2.23.10      
+#&gt; [124] codetools_0.2-16      MASS_7.3-51.6         gtools_3.8.2         
+#&gt; [127] assertthat_0.2.1      rhdf5_2.33.11         rprojroot_1.3-2      
+#&gt; [130] withr_2.3.0           multcomp_1.4-14       S4Vectors_0.27.14    
+#&gt; [133] mgcv_1.8-31           parallel_4.0.2        hms_0.5.3            
+#&gt; [136] rpart_4.1-15          quadprog_1.5-8        grid_4.0.2           
+#&gt; [139] rmarkdown_2.4         rvcheck_0.1.8         base64enc_0.1-3      
+#&gt; [142] WGCNA_1.69            Biobase_2.49.1        lubridate_1.7.9</code></pre>
 </details>
 </div>
 <div id="reference" class="section level2">
