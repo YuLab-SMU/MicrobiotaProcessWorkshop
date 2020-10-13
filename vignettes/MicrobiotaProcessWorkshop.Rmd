@@ -60,6 +60,9 @@ suppressPackageStartupMessages({
     library(ggplot2)
     library(tidyverse)
     library(vegan)
+    library(coin)
+    library(reshape2)
+    library(ggnewscale)
 })
 ```
 
@@ -262,16 +265,18 @@ cplot1 <- ggclust(obj=hcsample,
                   layout = "rectangular",
                   pointsize=1,
                   fontsize=0,
-                  factorNames=c("Group")) +
+                  factorNames=c("Group")
+              ) +
               scale_color_manual(values=c("#00AED7", "#FD9347")) +
-	      theme_tree2(legend.position="right",
+	          theme_tree2(legend.position="right",
 			  plot.title = element_text(face="bold", lineheight=25,hjust=0.5))
 # circular layout
 cplot2 <- ggclust(obj=hcsample,
                   layout = "circular",
-	          pointsize=1,
-	          fontsize=2,
-	         factorNames=c("Group")) +
+	              pointsize=1,
+	              fontsize=2,
+	              factorNames=c("Group")
+          ) +
           scale_color_manual(values=c("#00AED7", "#FD9347")) +
           theme(legend.position="right")
 cplot1 | cplot2
@@ -316,6 +321,7 @@ diffclade_p <- ggdiffclade(
                    layout="radial",
                    taxlevel=3, 
                    removeUnkown=TRUE,
+                   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
                ) +
                scale_fill_manual(
                    values=c("#00AED7", "#FD9347")
@@ -371,6 +377,72 @@ es_p <- ggeffectsize(obj=deres,
                                     "#FD9347")) 
 
 es_p
+```
+
+## Correlation of taxonomy
+
+The result of different analysis also can be visualized with result of correlation.
+
+```{r class.source = 'fold-hide', fig.width=6, fig.height=6, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:clade}Example of different biomarker clade and correlation of genera", plotcorAnddiff}
+genustab <- get_taxadf(ps, taxlevel=6)
+genustab <- data.frame(t(genustab@otu_table), check.names=FALSE)
+genustab <- data.frame(apply(genustab, 2, function(x)x/sum(x)), check.names=FALSE)
+
+cortest <- WGCNA::corAndPvalue(genustab, method="spearman", alternative="two.sided")
+cortest$cor[upper.tri(cortest$cor, diag = TRUE)] <- NA
+cortest$p[upper.tri(cortest$p, diag = TRUE)] <- NA
+cortab1 <- na.omit(melt(t(cortest$cor))) %>% rename(from=Var1,to=Var2,cor=value)
+corptab1 <- na.omit(melt(t(cortest$p))) %>% rename(pvalue=value)
+cortab1$fdr <- p.adjust(corptab1$pvalue, method="fdr")
+
+cortab1 <- cortab1 %>% mutate(correlation=case_when(cor>0 ~ "positive",cor < 0 ~ "negative",TRUE ~ "No"))
+cortab2 <- cortab1 %>% filter(fdr <= 0.05) %>% filter(cor <= -0.5 | cor >= 0.8)
+
+p <- ggdiffclade(
+         obj=deres,
+         alpha=0.3,
+         linewd=0.25,
+         skpointsize=0.2,
+         layout="inward_circular",
+         taxlevel=7,
+         cladetext=0,
+         setColors=FALSE,
+         xlim=16
+     ) +
+     scale_fill_manual(values=c("#00AED7", "#FD9347"),
+                       guide=guide_legend(keywidth=0.5,
+                                          keyheight=0.5,
+                                          order=3,
+                                          override.aes=list(alpha=1))
+     ) +
+     scale_size_continuous(range=c(1, 3),
+                       guide=guide_legend(keywidth=0.5,keyheight=0.5,order=4,
+                                          override.aes=list(shape=21))) +
+     scale_colour_manual(values=rep("white", 100),guide="none")
+
+p2 <- p +
+      new_scale_color() +
+      new_scale("size") +
+      geom_tiplab(size=1, hjust=1) +
+      geom_taxalink(
+          data=cortab2,
+          mapping=aes(taxa1=from,
+                      taxa2=to,
+                      colour=correlation,
+                      size=abs(cor)),
+          alpha=0.4,
+          ncp=10,
+          hratio=1,
+          offset=1.2
+      ) +
+      scale_size_continuous(range = c(0.2, 1),
+                            guide=guide_legend(keywidth=1, keyheight=0.5,
+                                               order=1, override.aes=list(alpha=1))
+      ) +
+      scale_colour_manual(values=c("chocolate2", "#009E73"),
+                          guide=guide_legend(keywidth=0.5, keyheight=0.5,
+                          order=2, override.aes=list(alpha=1, size=1)))
+p2
 ```
 
 ## Session information
