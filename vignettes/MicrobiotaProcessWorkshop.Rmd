@@ -190,6 +190,16 @@ pclass <- ggbartax(obj=classtaxa, facetNames="Group") +
 pclass
 ```
 
+```{r class.source="fold-hide", fig.width=4, fig.height=5, warning=FALSE, message=FALSE, fig.align="center"}
+# Show the abundance in different groups.
+fclass <- ggbartax(obj=classtaxa, facetNames="Group", plotgroup=TRUE, topn=10) +
+          xlab(NULL) +
+          ylab("relative abundance (%)") +
+          scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
+          guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5, ncol=2))
+fclass
+```
+
 If you want to view the count of taxonomy, you can set the `count` parameter of `ggbartax` to `TRUE`.
 
 ```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=8.5, fig.height=4, warning=FALSE, message=FALSE, fig.cap="\\label{fig:Abundance2}Example of taxonomic abundance (Count) of samples", abundance2}
