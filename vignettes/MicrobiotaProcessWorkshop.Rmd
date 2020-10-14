@@ -68,9 +68,13 @@ suppressPackageStartupMessages({
 
 Here, we use the 43 pediatric IBD stool samples as example, obtained from the Integrative Human Microbiome Project Consortium (iHMP). 
 
+![](./img/fig1.png)
+
 ## Importing the output of dada2
 
 The datasets were obtained from `https://www.microbiomeanalyst.ca/MicrobiomeAnalyst/resources/data/ibd_data.zip`. It contains `ibd_asv_table.txt`, which is feature table (*row features* X *column samples*), `ibd_meta.csv`, which is metadata file of samples, and `ibd_taxa.txt`, which is the taxonomic annotation of features. In the session, we use `import_dada2` of `MicrobiotaProcess` to import the datasets, and return a `phyloseq` object.
+
+![](./img/fig2.png)
 
 ```{r, message=FALSE, warning=FALSE, fold.plot=FALSE, fold.output=FALSE, LoadData}
 library(MicrobiotaProcess)
@@ -129,9 +133,13 @@ ps2 <- phyloseq(otu_table(otuda, taxa_are_rows=FALSE), sample_data(sampleda), ta
 ps2
 ```
 
-## Example of rarefaction visualization
+## alpha diversity analysis
+
+### rarefaction visualization
 
 Rarefaction, based on sampling technique, was used to compensate for the effect of sample size on the number of units observed in a sample. `MicrobiotaProcess` provided `ggrarecurve` to plot the curves, based on `rrarefy` of `vegan`
+
+![](./img/fig3.png)
 
 ```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=9.5, fig.height=6, warning=FALSE, message=FALSE, fig.cap="\\label{fig:Rarecurve}Example of rarefaction curve of samples", rarecurve}
 library(MicrobiotaProcess)
@@ -158,9 +166,11 @@ p_rare / prare1
 
 Since the curves in each sample were near saturation, the sequencing data were great enough with very few new species undetected
 
-## Example of calculate alpha index and visualization
+### Calculation and different analysis of alpha index
 
 Alpha index can evaluate the richness and abundance of microbial communities. `MicrobiotaProcess` provides `get_alphaindex` to calculate alpha index. Six common diversity measures (*Observe*, *Chao1*, *ACE*, *Shannon*, *Simpson*, *J*) are supported. And the different groups of samples can be tested and visualize by `ggbox`.
+
+![](./img/fig4.png)
 
 ```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=8, fig.height=3, warning=FALSE, message=FALSE, fig.cap="\\label{fig:Alphabox}Example of alpha box of samples", alphatest}
 library(MicrobiotaProcess)
@@ -172,9 +182,13 @@ p_alpha <- ggbox(alphaobj, geom="violin", factorNames="Group") +
 p_alpha
 ```
 
-## Example of visualization of taxonomy abundance
+## Taxonomy composition analysis
+
+### Statistics and visualization of specific levels
 
 `MicrobiotaProcess` presents the `ggbartax` for the visualization of composition of microbial communities. If you want to get the abundance of specific levels of class, You can use `get_taxadf` then use `ggbartax` to visualize.
+
+![](./img/fig5.png)
 
 ```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=8.5, fig.height=4, warning=FALSE, message=FALSE, fig.cap="\\label{fig:Abundance1}Example of taxonomic abundance of samples", abundance}
 library(ggplot2)
@@ -211,9 +225,11 @@ pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="Group") +
 pclass2
 ```
 
-## Venn or Upset plot
+### Venn or Upset plot
 
 The Venn or UpSet plot can help us to obtain the difference between groups in overview. MicrobiotaProcess provides features to obtain the input of VennDiagram or UpSet package.
+
+![](./img/fig6.png)
 
 ```{r, fold.output=FALSE, fold.plot=FALSE, fig.width=6, fig.height=6, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:PCA}Example Venn or Upset plot", Venn}
 vennlist <- get_vennlist(obj=ps, factorNames="Group")
@@ -251,6 +267,8 @@ upset(upsetda, sets=unique(as.vector(ps@sam_data$Group)),
 
 `PCA` (Principal component analysis) and `PCoA` (Principal Coordinate Analysis) are general statistical procedures to compare groups of samples. And `PCoA` can based on the phylogenetic or count-based distance metrics, such as `Bray-Curtis`, `Jaccard`, `Unweighted-UniFrac` and `weighted-UniFrac`. `MicrobiotaProcess` presents the `get_pca`, `get_pcoa` and `ggordpoint` for the analysis.
 
+![](./img/fig7.png)
+
 ```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=9, fig.height=3.6, warning=FALSE, message=FALSE, fig.cap="\\label{fig:PCA}Example of PCA of samples", PCAplot}
 library(MicrobiotaProcess)
 library(patchwork)
@@ -268,6 +286,8 @@ pcaplot1 | pcaplot2
 ```
 
 ### PCoA analysis
+
+![](./img/fig7.png)
 
 ```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=9, fig.height=3.6, warning=FALSE, message=FALSE, fig.cap="\\label{fig:PCoA}Example of PCoA of samples", PCoAplot}
 # distmethod
@@ -298,9 +318,11 @@ adores <- adonis(distme ~ Group, data=sampleda, permutation=9999)
 data.frame(adores$aov.tab)
 ```
 
-## hierarchical cluster analysis of samples
+### hierarchical cluster analysis of samples
 
 `beta diversity` metrics can assess the differences between microbial communities. It can be visualized with `PCA` or `PCoA`, this can also be visualized with hierarchical clustering. `MicrobiotaProcess` implements the analysis based on `ggtree`.
+
+![](./img/fig8.png)
 
 ```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=10, fig.height=4, warning=FALSE, message=FALSE, fig.cap="\\label{fig:HClust}Example of hierarchical clustering of samples", Clust}
 library(ggplot2)
@@ -334,6 +356,8 @@ cplot1 | cplot2
 
 This package provides `diff_analysis` to detect the biomarker. And the results can be visualized by `ggdiffbox`, `ggdiffclade`, `ggeffectsize` and `ggdifftaxbar`
 
+![](./img/fig9.png)
+
 ```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, warning=FALSE, message=FALSE, DErun}
 # for the kruskal_test and wilcox_test
 library(coin)
@@ -359,6 +383,8 @@ deres
 
 The color of discriminative taxa represent the taxa is more abundant in the corresponding group. The point size shows the negative logarithms (base 10) of pvalue. The bigger size of point shows more
 significant (lower pvalue), the pvalue was calculated in the first step test.
+
+![](./img/fig9.png)
 
 ```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=6, fig.height=6, warning=FALSE, message=FALSE, fig.cap="\\label{fig:clade}Example of different biomarker clade", plotclade}
 diffclade_p <- ggdiffclade(
@@ -397,6 +423,8 @@ diffclade_p
 The left panel represents the relative abundance or abundance (according the standard_method) of biomarker, the right panel represents the confident interval of effect size (LDA or MDA) of biomarker.
 The bigger confident interval shows that the biomarker is more fluctuant, owing to the influence of samples number.
 
+![](./img/fig10.png)
+
 ```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=6, fig.height=4, warning=FALSE, message=FALSE, fig.cap="\\label{fig:diffboxplot}Example of biomarker boxplot and effect size", diffbox}
 diffbox <- ggdiffbox(obj=deres, box_notch=FALSE, 
 		     colorlist=c("#00AED7", "#FD9347"), l_xlabtext="relative abundance")
@@ -407,6 +435,8 @@ diffbox
 
 `ggdifftaxbar` can visualize the abundance of biomarker in each samples of groups, the mean and median abundance of groups or subgroups are also showed. `output` parameter is the directory of output.
 
+![](./img/fig11.png)
+
 ```{r class.source = 'fold-show'}
 ggdifftaxbar(obj=deres, xtextsize=1.5, 
              output="IBD_biomarkder_barplot",
@@ -416,6 +446,8 @@ ggdifftaxbar(obj=deres, xtextsize=1.5,
 ### visualization of different results by `ggeffectsize`
 
 The result is similar with the result of `ggdiffbox`, the bigger confident interval shows that the biomarker is more fluctuant owing to the influence of samples number.
+
+![](./img/fig12.png)
 
 ```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=5, fig.height=5, warning=FALSE, message=FALSE, fig.cap="\\label{fig:ESplot}Example of effect size of biomarker", plotES}
 es_p <- ggeffectsize(obj=deres, 
