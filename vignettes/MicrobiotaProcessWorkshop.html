@@ -1609,14 +1609,14 @@ div.tocify {
 <div id="load-required-packages" class="section level2">
 <h2>Load required packages</h2>
 <pre class="r"><code>suppressPackageStartupMessages({
-    library(MicrobiotaProcess)
-    library(phyloseq)
-    library(ggplot2)
-    library(tidyverse)
-    library(vegan)
-    library(coin)
-    library(reshape2)
-    library(ggnewscale)
+    library(MicrobiotaProcess) # an R package for analysis, visualization and biomarker discovery of Microbiome.
+    library(phyloseq) # Handling and analysis of high-throughput microbiome census data.
+    library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics.
+    library(tidyverse) # Easily Install and Load the &#39;Tidyverse&#39;.
+    library(vegan) # Community Ecology Package.
+    library(coin) # Conditional Inference Procedures in a Permutation Test Framework.
+    library(reshape2) # Flexibly Reshape Data: A Reboot of the Reshape Package.
+    library(ggnewscale) # Multiple Fill and Colour Scales in &#39;ggplot2&#39;.
 })</code></pre>
 <p>Here, we use the 43 pediatric IBD stool samples as example, obtained from the Integrative Human Microbiome Project Consortium (iHMP).</p>
 </div>
@@ -1893,8 +1893,10 @@ Example Venn or Upset plot
 </p>
 </div>
 </div>
-<div id="example-of-pca-and-pcoa-analysis" class="section level2">
-<h2>Example of PCA and PCoA analysis</h2>
+<div id="beta-analysis" class="section level2">
+<h2>beta analysis</h2>
+<div id="pca-analysis" class="section level3">
+<h3>PCA analysis</h3>
 <p><code>PCA</code> (Principal component analysis) and <code>PCoA</code> (Principal Coordinate Analysis) are general statistical procedures to compare groups of samples. And <code>PCoA</code> can based on the phylogenetic or count-based distance metrics, such as <code>Bray-Curtis</code>, <code>Jaccard</code>, <code>Unweighted-UniFrac</code> and <code>weighted-UniFrac</code>. <code>MicrobiotaProcess</code> presents the <code>get_pca</code>, <code>get_pcoa</code> and <code>ggordpoint</code> for the analysis.</p>
 <pre class="r fold-show"><code>library(MicrobiotaProcess)
 library(patchwork)
@@ -1916,9 +1918,11 @@ Example of PCA of samples
 </p>
 </div>
 </div>
-<div id="example-of-pcoa-analysis" class="section level2">
-<h2>Example of PCoA analysis</h2>
-<pre class="r fold-show"><code>pcoares &lt;- get_pcoa(obj=ps, distmethod=&quot;bray&quot;, method=&quot;hellinger&quot;)
+<div id="pcoa-analysis" class="section level3">
+<h3>PCoA analysis</h3>
+<pre class="r fold-show"><code># distmethod
+# &quot;unifrac&quot;,  &quot;wunifrac&quot;, &quot;manhattan&quot;, &quot;euclidean&quot;, &quot;canberra&quot;, &quot;bray&quot;, &quot;kulczynski&quot; ...(vegdist, dist)
+pcoares &lt;- get_pcoa(obj=ps, distmethod=&quot;bray&quot;, method=&quot;hellinger&quot;)
 # Visualizing the result
 pcoaplot1 &lt;- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
                        factorNames=c(&quot;Group&quot;), ellipse=TRUE) +
@@ -1933,6 +1937,7 @@ pcoaplot1 | pcoaplot2</code></pre>
 <p class="caption">
 Example of PCoA of samples
 </p>
+</div>
 </div>
 <div id="permutational-multivariate-analysis-of-variance" class="section level3">
 <h3>Permutational Multivariate Analysis of Variance</h3>
@@ -1953,8 +1958,8 @@ data.frame(adores$aov.tab)</code></pre>
 </details>
 </div>
 </div>
-<div id="example-of-hierarchical-cluster-analysis-of-samples" class="section level2">
-<h2>Example of hierarchical cluster analysis of samples</h2>
+<div id="hierarchical-cluster-analysis-of-samples" class="section level2">
+<h2>hierarchical cluster analysis of samples</h2>
 <p><code>beta diversity</code> metrics can assess the differences between microbial communities. It can be visualized with <code>PCA</code> or <code>PCoA</code>, this can also be visualized with hierarchical clustering. <code>MicrobiotaProcess</code> implements the analysis based on <code>ggtree</code>.</p>
 <pre class="r fold-show"><code>library(ggplot2)
 library(MicrobiotaProcess)
@@ -1988,8 +1993,8 @@ Example of hierarchical clustering of samples
 </p>
 </div>
 </div>
-<div id="example-of-biomarker-discovery" class="section level2">
-<h2>Example of biomarker discovery</h2>
+<div id="biomarker-discovery" class="section level2">
+<h2>biomarker discovery</h2>
 <p>This package provides <code>diff_analysis</code> to detect the biomarker. And the results can be visualized by <code>ggdiffbox</code>, <code>ggdiffclade</code>, <code>ggeffectsize</code> and <code>ggdifftaxbar</code></p>
 <pre class="r fold-show"><code># for the kruskal_test and wilcox_test
 library(coin)
@@ -2015,9 +2020,8 @@ deres
 #&gt; after first test (kruskal_test) number of feature (pvalue&lt;=0.05):71
 #&gt; after second test (wilcox_test) number of significantly discriminative feature:28
 #&gt; after lda, Number of discriminative features: 22 (certain taxonomy classification:15; uncertain taxonomy classication: 7)</code></pre>
-</div>
-<div id="example-of-visualization-of-different-results-by-ggdiffclade" class="section level2">
-<h2>Example of visualization of different results by <code>ggdiffclade</code></h2>
+<div id="visualization-of-different-results-by-ggdiffclade" class="section level3">
+<h3>visualization of different results by <code>ggdiffclade</code></h3>
 <p>The color of discriminative taxa represent the taxa is more abundant in the corresponding group. The point size shows the negative logarithms (base 10) of pvalue. The bigger size of point shows more significant (lower pvalue), the pvalue was calculated in the first step test.</p>
 <pre class="r fold-show"><code>diffclade_p &lt;- ggdiffclade(
                    obj=deres, 
@@ -2055,8 +2059,8 @@ Example of different biomarker clade
 </p>
 </div>
 </div>
-<div id="example-of-visualization-of-different-results-by-ggdiffbox" class="section level2">
-<h2>Example of visualization of different results by <code>ggdiffbox</code></h2>
+<div id="visualization-of-different-results-by-ggdiffbox" class="section level3">
+<h3>visualization of different results by <code>ggdiffbox</code></h3>
 <p>The left panel represents the relative abundance or abundance (according the standard_method) of biomarker, the right panel represents the confident interval of effect size (LDA or MDA) of biomarker. The bigger confident interval shows that the biomarker is more fluctuant, owing to the influence of samples number.</p>
 <pre class="r fold-show"><code>diffbox &lt;- ggdiffbox(obj=deres, box_notch=FALSE, 
              colorlist=c(&quot;#00AED7&quot;, &quot;#FD9347&quot;), l_xlabtext=&quot;relative abundance&quot;)
@@ -2068,15 +2072,15 @@ Example of biomarker boxplot and effect size
 </p>
 </div>
 </div>
-<div id="example-of-visualization-of-different-results-by-ggdifftaxbar" class="section level2">
-<h2>Example of visualization of different results by <code>ggdifftaxbar</code></h2>
+<div id="visualization-of-different-results-by-ggdifftaxbar" class="section level3">
+<h3>visualization of different results by <code>ggdifftaxbar</code></h3>
 <p><code>ggdifftaxbar</code> can visualize the abundance of biomarker in each samples of groups, the mean and median abundance of groups or subgroups are also showed. <code>output</code> parameter is the directory of output.</p>
 <pre class="r fold-show"><code>ggdifftaxbar(obj=deres, xtextsize=1.5, 
              output=&quot;IBD_biomarkder_barplot&quot;,
              coloslist=c(&quot;#00AED7&quot;, &quot;#FD9347&quot;))</code></pre>
 </div>
-<div id="example-of-visualization-of-different-results-by-ggeffectsize" class="section level2">
-<h2>Example of visualization of different results by <code>ggeffectsize</code></h2>
+<div id="visualization-of-different-results-by-ggeffectsize" class="section level3">
+<h3>visualization of different results by <code>ggeffectsize</code></h3>
 <p>The result is similar with the result of <code>ggdiffbox</code>, the bigger confident interval shows that the biomarker is more fluctuant owing to the influence of samples number.</p>
 <pre class="r fold-show"><code>es_p &lt;- ggeffectsize(obj=deres, 
                      lineheight=0.1,
@@ -2090,6 +2094,7 @@ es_p</code></pre>
 <p class="caption">
 Example of effect size of biomarker
 </p>
+</div>
 </div>
 </div>
 <div id="correlation-of-taxonomy" class="section level2">

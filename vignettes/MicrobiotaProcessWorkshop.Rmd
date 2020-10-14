@@ -55,14 +55,14 @@ knitr::knit_hooks$set(
 
 ```{r setup}
 suppressPackageStartupMessages({
-    library(MicrobiotaProcess)
-    library(phyloseq)
-    library(ggplot2)
-    library(tidyverse)
-    library(vegan)
-    library(coin)
-    library(reshape2)
-    library(ggnewscale)
+    library(MicrobiotaProcess) # an R package for analysis, visualization and biomarker discovery of Microbiome.
+    library(phyloseq) # Handling and analysis of high-throughput microbiome census data.
+    library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics.
+    library(tidyverse) # Easily Install and Load the 'Tidyverse'.
+    library(vegan) # Community Ecology Package.
+    library(coin) # Conditional Inference Procedures in a Permutation Test Framework.
+    library(reshape2) # Flexibly Reshape Data: A Reboot of the Reshape Package.
+    library(ggnewscale) # Multiple Fill and Colour Scales in 'ggplot2'.
 })
 ```
 
@@ -245,7 +245,9 @@ upset(upsetda, sets=unique(as.vector(ps@sam_data$Group)),
       empty.intersections = "on")
 ```
 
-## Example of PCA and PCoA analysis
+## beta analysis
+
+### PCA analysis
 
 `PCA` (Principal component analysis) and `PCoA` (Principal Coordinate Analysis) are general statistical procedures to compare groups of samples. And `PCoA` can based on the phylogenetic or count-based distance metrics, such as `Bray-Curtis`, `Jaccard`, `Unweighted-UniFrac` and `weighted-UniFrac`. `MicrobiotaProcess` presents the `get_pca`, `get_pcoa` and `ggordpoint` for the analysis.
 
@@ -265,9 +267,11 @@ pcaplot2 <- ggordpoint(obj=pcares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
 pcaplot1 | pcaplot2
 ```
 
-## Example of PCoA analysis
+### PCoA analysis
 
 ```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=9, fig.height=3.6, warning=FALSE, message=FALSE, fig.cap="\\label{fig:PCoA}Example of PCoA of samples", PCoAplot}
+# distmethod
+# "unifrac",  "wunifrac", "manhattan", "euclidean", "canberra", "bray", "kulczynski" ...(vegdist, dist)
 pcoares <- get_pcoa(obj=ps, distmethod="bray", method="hellinger")
 # Visualizing the result
 pcoaplot1 <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
@@ -294,7 +298,7 @@ adores <- adonis(distme ~ Group, data=sampleda, permutation=9999)
 data.frame(adores$aov.tab)
 ```
 
-## Example of hierarchical cluster analysis of samples
+## hierarchical cluster analysis of samples
 
 `beta diversity` metrics can assess the differences between microbial communities. It can be visualized with `PCA` or `PCoA`, this can also be visualized with hierarchical clustering. `MicrobiotaProcess` implements the analysis based on `ggtree`.
 
@@ -326,7 +330,7 @@ cplot2 <- ggclust(obj=hcsample,
 cplot1 | cplot2
 ```
 
-## Example of biomarker discovery
+## biomarker discovery
 
 This package provides `diff_analysis` to detect the biomarker. And the results can be visualized by `ggdiffbox`, `ggdiffclade`, `ggeffectsize` and `ggdifftaxbar`
 
@@ -351,7 +355,7 @@ deres <- diff_analysis(obj = ps, classgroup = "Group",
 deres
 ```
 
-## Example of visualization of different results by `ggdiffclade`
+### visualization of different results by `ggdiffclade`
 
 The color of discriminative taxa represent the taxa is more abundant in the corresponding group. The point size shows the negative logarithms (base 10) of pvalue. The bigger size of point shows more
 significant (lower pvalue), the pvalue was calculated in the first step test.
@@ -388,7 +392,7 @@ diffclade_p <- ggdiffclade(
 diffclade_p
 ```
 
-## Example of visualization of different results by `ggdiffbox`
+### visualization of different results by `ggdiffbox`
 
 The left panel represents the relative abundance or abundance (according the standard_method) of biomarker, the right panel represents the confident interval of effect size (LDA or MDA) of biomarker.
 The bigger confident interval shows that the biomarker is more fluctuant, owing to the influence of samples number.
@@ -399,7 +403,7 @@ diffbox <- ggdiffbox(obj=deres, box_notch=FALSE,
 diffbox
 ```
 
-## Example of visualization of different results by `ggdifftaxbar`
+### visualization of different results by `ggdifftaxbar`
 
 `ggdifftaxbar` can visualize the abundance of biomarker in each samples of groups, the mean and median abundance of groups or subgroups are also showed. `output` parameter is the directory of output.
 
@@ -409,7 +413,7 @@ ggdifftaxbar(obj=deres, xtextsize=1.5,
              coloslist=c("#00AED7", "#FD9347"))
 ```
 
-## Example of visualization of different results by `ggeffectsize`
+### visualization of different results by `ggeffectsize`
 
 The result is similar with the result of `ggdiffbox`, the bigger confident interval shows that the biomarker is more fluctuant owing to the influence of samples number.
 
