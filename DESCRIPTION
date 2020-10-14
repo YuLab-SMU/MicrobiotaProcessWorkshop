@@ -1,6 +1,6 @@
 Package: MicrobiotaProcessWorkshop
 Title: The workshop of analysis of microbiome dataset using MicrobiotaProcess
-Version: 0.0.0.9000
+Version: 0.0.0.91
 Authors@R: c(
     person(given = "Shuangbin",   family = "Xu", role = c("aut", "cre"), email = "xshuangbin@163.com",    comment = c(ORCID = "0000-0003-3513-5362")),
     person(given = "Guangchuang", family= "Yu",  role = c("aut"),        email="guangchuangyu@gmail.com", comment = c(ORCID = "0000-0002-6485-8781"))
