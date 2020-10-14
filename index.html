@@ -104,6 +104,23 @@
 <li>A computer that runs on Unix-like system.</li>
 </ul>
 </div>
+<div id="how-to-run-docker" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-to-run-docker" class="anchor"></a>How to run Docker</h2>
+<ul>
+<li>Install Docker (<a href="https://www.docker.com/" class="uri">https://www.docker.com/</a>)</li>
+<li>Pull the Docker image from Docker hub: <code>docker pull xushuangbin/microbiotaprocessworkshop</code>
+</li>
+<li>Run the image: <code>docker run -e PASSWORD=yourpassword -p 8787:8787 xushuangbin/microbiotaprocessworkshop</code>
+</li>
+<li>Log in to RStudio at <a href="http://localhost:8787" class="uri">http://localhost:8787</a> using username <code>rstudio</code> and password <code>yourpassword</code>. For Windows users, you also need to provide your IP address, you can find it using <code>docker-machine ip default</code>.</li>
+<li>Inside the RStudio, run: <code><a href="https://rdrr.io/r/utils/browseVignettes.html">browseVignettes(package = "xushuangbin/microbiotaprocessworkshop")</a></code>
+</li>
+<li>You can click one of the links: “HTML”, “source”, “R code”</li>
+<li>In case of <code>The requested page was not found</code> error, try add ‘help/’ in front of the hostname in the URL (this is a known bug): <a href="http://localhost:8787/help/library/microbiotaprocessworkshop/doc/MicrobiotaProcessWorkshop.html" class="uri">http://localhost:8787/help/library/microbiotaprocessworkshop/doc/MicrobiotaProcessWorkshop.html</a>
+</li>
+</ul>
+</div>
 <div id="r--bioconductor-packages-used" class="section level2">
 <h2 class="hasAnchor">
 <a href="#r--bioconductor-packages-used" class="anchor"></a><em>R</em> / <em>Bioconductor</em> packages used</h2>
