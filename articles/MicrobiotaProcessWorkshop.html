@@ -89,7 +89,7 @@
     
 <div id="load-required-packages" class="section level2">
 <h2 class="hasAnchor">
-<a href="#load-required-packages" class="anchor"></a>Load required packages</h2>
+<a href="#load-required-packages" class="anchor"></a>1. Load required packages</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="op">{</span>
     <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/YuLab-SMU/MicrobiotaProcess/">MicrobiotaProcess</a></span><span class="op">)</span> <span class="co"># an R package for analysis, visualization and biomarker discovery of Microbiome.</span>
@@ -106,7 +106,7 @@
 </div>
 <div id="importing-the-output-of-dada2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#importing-the-output-of-dada2" class="anchor"></a>Importing the output of dada2</h2>
+<a href="#importing-the-output-of-dada2" class="anchor"></a>2. Importing the output of dada2</h2>
 <p>The datasets were obtained from <code>https://www.microbiomeanalyst.ca/MicrobiomeAnalyst/resources/data/ibd_data.zip</code>. It contains <code>ibd_asv_table.txt</code>, which is feature table (<em>row features</em> X <em>column samples</em>), <code>ibd_meta.csv</code>, which is metadata file of samples, and <code>ibd_taxa.txt</code>, which is the taxonomic annotation of features. In the session, we use <code>import_dada2</code> of <code>MicrobiotaProcess</code> to import the datasets, and return a <code>phyloseq</code> object.</p>
 <p><img src="img/fig2.png"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
@@ -139,7 +139,7 @@
 <span class="co">#&gt; refseq()      DNAStringSet:      [ 1432 reference sequences ]</span></pre></div>
 <div id="other-import" class="section level3">
 <h3 class="hasAnchor">
-<a href="#other-import" class="anchor"></a>Other import</h3>
+<a href="#other-import" class="anchor"></a>2.1 Other import</h3>
 <table class="table table">
 <caption>
 List of import function
@@ -238,10 +238,10 @@ import table
 </div>
 <div id="alpha-diversity-analysis" class="section level2">
 <h2 class="hasAnchor">
-<a href="#alpha-diversity-analysis" class="anchor"></a>alpha diversity analysis</h2>
+<a href="#alpha-diversity-analysis" class="anchor"></a>3. alpha diversity analysis</h2>
 <div id="rarefaction-visualization" class="section level3">
 <h3 class="hasAnchor">
-<a href="#rarefaction-visualization" class="anchor"></a>rarefaction visualization</h3>
+<a href="#rarefaction-visualization" class="anchor"></a>3.1 rarefaction visualization</h3>
 <p>Rarefaction, based on sampling technique, was used to compensate for the effect of sample size on the number of units observed in a sample. <code>MicrobiotaProcess</code> provided <code>ggrarecurve</code> to plot the curves, based on <code>rrarefy</code> of <code>vegan</code></p>
 <p><img src="img/fig3.png"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
@@ -274,7 +274,7 @@ Example of rarefaction curve of samples
 </div>
 <div id="calculation-and-different-analysis-of-alpha-index" class="section level3">
 <h3 class="hasAnchor">
-<a href="#calculation-and-different-analysis-of-alpha-index" class="anchor"></a>Calculation and different analysis of alpha index</h3>
+<a href="#calculation-and-different-analysis-of-alpha-index" class="anchor"></a>3.2 Calculation and different analysis of alpha index</h3>
 <p>Alpha index can evaluate the richness and abundance of microbial communities. <code>MicrobiotaProcess</code> provides <code>get_alphaindex</code> to calculate alpha index. Six common diversity measures (<em>Observe</em>, <em>Chao1</em>, <em>ACE</em>, <em>Shannon</em>, <em>Simpson</em>, <em>J</em>) are supported. And the different groups of samples can be tested and visualize by <code>ggbox</code>.</p>
 <p><img src="img/fig4.png"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
@@ -302,10 +302,10 @@ Example of alpha box of samples
 </div>
 <div id="taxonomy-composition-analysis" class="section level2">
 <h2 class="hasAnchor">
-<a href="#taxonomy-composition-analysis" class="anchor"></a>Taxonomy composition analysis</h2>
+<a href="#taxonomy-composition-analysis" class="anchor"></a>4. Taxonomy composition analysis</h2>
 <div id="statistics-and-visualization-of-specific-levels" class="section level3">
 <h3 class="hasAnchor">
-<a href="#statistics-and-visualization-of-specific-levels" class="anchor"></a>Statistics and visualization of specific levels</h3>
+<a href="#statistics-and-visualization-of-specific-levels" class="anchor"></a>4.1 Statistics and visualization of specific levels</h3>
 <p><code>MicrobiotaProcess</code> presents the <code>ggbartax</code> for the visualization of composition of microbial communities. If you want to get the abundance of specific levels of class, You can use <code>get_taxadf</code> then use <code>ggbartax</code> to visualize.</p>
 <p><img src="img/fig5.png"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
@@ -351,7 +351,7 @@ Example of taxonomic abundance (Count) of samples
 </div>
 <div id="venn-or-upset-plot" class="section level3">
 <h3 class="hasAnchor">
-<a href="#venn-or-upset-plot" class="anchor"></a>Venn or Upset plot</h3>
+<a href="#venn-or-upset-plot" class="anchor"></a>4.2 Venn or Upset plot</h3>
 <p>The Venn or UpSet plot can help us to obtain the difference between groups in overview. MicrobiotaProcess provides features to obtain the input of VennDiagram or UpSet package.</p>
 <p><img src="img/fig6.png"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit">
@@ -396,10 +396,10 @@ Example of Upset plot
 </div>
 <div id="beta-analysis" class="section level2">
 <h2 class="hasAnchor">
-<a href="#beta-analysis" class="anchor"></a>beta analysis</h2>
+<a href="#beta-analysis" class="anchor"></a>5. beta analysis</h2>
 <div id="pca-analysis" class="section level3">
 <h3 class="hasAnchor">
-<a href="#pca-analysis" class="anchor"></a>PCA analysis</h3>
+<a href="#pca-analysis" class="anchor"></a>5.1 PCA analysis</h3>
 <p><code>PCA</code> (Principal component analysis) and <code>PCoA</code> (Principal Coordinate Analysis) are general statistical procedures to compare groups of samples. And <code>PCoA</code> can based on the phylogenetic or count-based distance metrics, such as <code>Bray-Curtis</code>, <code>Jaccard</code>, <code>Unweighted-UniFrac</code> and <code>weighted-UniFrac</code>. <code>MicrobiotaProcess</code> presents the <code>get_pca</code>, <code>get_pcoa</code> and <code>ggordpoint</code> for the analysis.</p>
 <p><img src="img/fig7.png"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit">
@@ -424,7 +424,7 @@ Example of PCA of samples
 </div>
 <div id="pcoa-analysis" class="section level3">
 <h3 class="hasAnchor">
-<a href="#pcoa-analysis" class="anchor"></a>PCoA analysis</h3>
+<a href="#pcoa-analysis" class="anchor"></a>5.2 PCoA analysis</h3>
 <p><img src="img/fig7.png"></p>
 <div class="sourceCode" id="cb14"><pre class="downlit">
 <span class="co"># distmethod</span>
@@ -447,7 +447,7 @@ Example of PCoA of samples
 </div>
 <div id="permutational-multivariate-analysis-of-variance" class="section level3">
 <h3 class="hasAnchor">
-<a href="#permutational-multivariate-analysis-of-variance" class="anchor"></a>Permutational Multivariate Analysis of Variance</h3>
+<a href="#permutational-multivariate-analysis-of-variance" class="anchor"></a>5.3 Permutational Multivariate Analysis of Variance</h3>
 <p>We also can perform the Permutational Multivariate Analysis of Variance using the <code>vegan</code></p>
 <div class="sourceCode" id="cb15"><pre class="downlit">
 <span class="va">distme</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/get_dist.html">get_dist</a></span><span class="op">(</span><span class="va">ps</span>, distmethod <span class="op">=</span><span class="st">"bray"</span>, method<span class="op">=</span><span class="st">"hellinger"</span><span class="op">)</span>
@@ -466,7 +466,7 @@ Example of PCoA of samples
 </div>
 <div id="hierarchical-cluster-analysis-of-samples" class="section level3">
 <h3 class="hasAnchor">
-<a href="#hierarchical-cluster-analysis-of-samples" class="anchor"></a>hierarchical cluster analysis of samples</h3>
+<a href="#hierarchical-cluster-analysis-of-samples" class="anchor"></a>5.4 hierarchical cluster analysis of samples</h3>
 <p><code>beta diversity</code> metrics can assess the differences between microbial communities. It can be visualized with <code>PCA</code> or <code>PCoA</code>, this can also be visualized with hierarchical clustering. <code>MicrobiotaProcess</code> implements the analysis based on <code>ggtree</code>.</p>
 <p><img src="img/fig8.png"></p>
 <div class="sourceCode" id="cb17"><pre class="downlit">
@@ -504,7 +504,7 @@ Example of hierarchical clustering of samples
 </div>
 <div id="biomarker-discovery" class="section level2">
 <h2 class="hasAnchor">
-<a href="#biomarker-discovery" class="anchor"></a>biomarker discovery</h2>
+<a href="#biomarker-discovery" class="anchor"></a>6. biomarker discovery</h2>
 <p>This package provides <code>diff_analysis</code> to detect the biomarker. And the results can be visualized by <code>ggdiffbox</code>, <code>ggdiffclade</code>, <code>ggeffectsize</code> and <code>ggdifftaxbar</code></p>
 <p><img src="img/fig9.png"></p>
 <div class="sourceCode" id="cb18"><pre class="downlit">
@@ -534,7 +534,7 @@ Example of hierarchical clustering of samples
 <span class="co">#&gt; after lda, Number of discriminative features: 22 (certain taxonomy classification:15; uncertain taxonomy classication: 7)</span></pre></div>
 <div id="visualization-of-different-results-by-ggdiffclade" class="section level3">
 <h3 class="hasAnchor">
-<a href="#visualization-of-different-results-by-ggdiffclade" class="anchor"></a>visualization of different results by <code>ggdiffclade</code>
+<a href="#visualization-of-different-results-by-ggdiffclade" class="anchor"></a>6.1 visualization of different results by <code>ggdiffclade</code>
 </h3>
 <p>The color of discriminative taxa represent the taxa is more abundant in the corresponding group. The point size shows the negative logarithms (base 10) of pvalue. The bigger size of point shows more significant (lower pvalue), the pvalue was calculated in the first step test.</p>
 <p><img src="img/fig9.png"></p>
@@ -576,7 +576,7 @@ Example of different biomarker clade
 </div>
 <div id="visualization-of-different-results-by-ggdiffbox" class="section level3">
 <h3 class="hasAnchor">
-<a href="#visualization-of-different-results-by-ggdiffbox" class="anchor"></a>visualization of different results by <code>ggdiffbox</code>
+<a href="#visualization-of-different-results-by-ggdiffbox" class="anchor"></a>6.2 visualization of different results by <code>ggdiffbox</code>
 </h3>
 <p>The left panel represents the relative abundance or abundance (according the standard_method) of biomarker, the right panel represents the confident interval of effect size (LDA or MDA) of biomarker. The bigger confident interval shows that the biomarker is more fluctuant, owing to the influence of samples number.</p>
 <p><img src="img/fig10.png"></p>
@@ -592,7 +592,7 @@ Example of biomarker boxplot and effect size
 </div>
 <div id="visualization-of-different-results-by-ggdifftaxbar" class="section level3">
 <h3 class="hasAnchor">
-<a href="#visualization-of-different-results-by-ggdifftaxbar" class="anchor"></a>visualization of different results by <code>ggdifftaxbar</code>
+<a href="#visualization-of-different-results-by-ggdifftaxbar" class="anchor"></a>6.3 visualization of different results by <code>ggdifftaxbar</code>
 </h3>
 <p><code>ggdifftaxbar</code> can visualize the abundance of biomarker in each samples of groups, the mean and median abundance of groups or subgroups are also showed. <code>output</code> parameter is the directory of output.</p>
 <p><img src="img/fig11.png"></p>
@@ -603,7 +603,7 @@ Example of biomarker boxplot and effect size
 </div>
 <div id="visualization-of-different-results-by-ggeffectsize" class="section level3">
 <h3 class="hasAnchor">
-<a href="#visualization-of-different-results-by-ggeffectsize" class="anchor"></a>visualization of different results by <code>ggeffectsize</code>
+<a href="#visualization-of-different-results-by-ggeffectsize" class="anchor"></a>6.4 visualization of different results by <code>ggeffectsize</code>
 </h3>
 <p>The result is similar with the result of <code>ggdiffbox</code>, the bigger confident interval shows that the biomarker is more fluctuant owing to the influence of samples number.</p>
 <p><img src="img/fig12.png"></p>
@@ -624,7 +624,7 @@ Example of effect size of biomarker
 </div>
 <div id="correlation-of-taxonomy" class="section level2">
 <h2 class="hasAnchor">
-<a href="#correlation-of-taxonomy" class="anchor"></a>Correlation of taxonomy</h2>
+<a href="#correlation-of-taxonomy" class="anchor"></a>7. Correlation of taxonomy</h2>
 <p>The result of different analysis also can be visualized with result of correlation.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit">
 <span class="va">genustab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiotaProcess/man/get_taxadf.html">get_taxadf</a></span><span class="op">(</span><span class="va">ps</span>, taxlevel<span class="op">=</span><span class="fl">6</span><span class="op">)</span>
@@ -696,7 +696,7 @@ Example of different biomarker clade and correlation of genera
 </div>
 <div id="session-information" class="section level2">
 <h2 class="hasAnchor">
-<a href="#session-information" class="anchor"></a>Session information</h2>
+<a href="#session-information" class="anchor"></a>8. Session information</h2>
 <p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> on the system on which this document was compiled:</p>
 <details><p><summary>output</summary></p>
 <pre><code>#&gt; R version 4.0.2 (2020-06-22)
@@ -783,7 +783,7 @@ Example of different biomarker clade and correlation of genera
 </div>
 <div id="reference" class="section level2">
 <h2 class="hasAnchor">
-<a href="#reference" class="anchor"></a>Reference</h2>
+<a href="#reference" class="anchor"></a>9. Reference</h2>
 </div>
   </div>
 
