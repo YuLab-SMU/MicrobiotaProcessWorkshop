@@ -85,3 +85,14 @@ Specifically, we will demonstrate how to perform downstream analysis
     <https://yulab-smu.top/treedata-book/related-tools.html>
   - GitHub Action build status badge:
     ![.github/workflows/basic\_checks.yaml](https://github.com/YuLab-SMU/MicrobiotaProcessWorkshop/workflows/.github/workflows/basic_checks.yaml/badge.svg)
+  - rstudio cloud instance
+      - <http://workshop.bioc.cancerdatasci.org>
+    
+      - 选择：Analysis and visualization of microbiome datasets using
+        MicrobiotaProcess(Chinese)
+    
+      - 邮箱：输入你的邮箱
+    
+      - 账号:rstudio
+    
+      - 密码:welcome-to-bioc2020
