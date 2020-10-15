@@ -141,7 +141,7 @@ Rarefaction, based on sampling technique, was used to compensate for the effect 
 
 ![](./img/fig3.png)
 
-```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=9.5, fig.height=6, warning=FALSE, message=FALSE, fig.cap="\\label{fig:Rarecurve}Example of rarefaction curve of samples", rarecurve}
+```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=9.5, fig.height=6, fig.align="center",warning=FALSE, message=FALSE, fig.cap="\\label{fig:Rarecurve}Example of rarefaction curve of samples", rarecurve}
 library(MicrobiotaProcess)
 library(patchwork)
 # for reproducibly random number
@@ -172,7 +172,7 @@ Alpha index can evaluate the richness and abundance of microbial communities. `M
 
 ![](./img/fig4.png)
 
-```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=8, fig.height=3, warning=FALSE, message=FALSE, fig.cap="\\label{fig:Alphabox}Example of alpha box of samples", alphatest}
+```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=8, fig.height=3, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:Alphabox}Example of alpha box of samples", alphatest}
 library(MicrobiotaProcess)
 alphaobj <- get_alphaindex(ps)
 head(as.data.frame(alphaobj))
@@ -190,7 +190,7 @@ p_alpha
 
 ![](./img/fig5.png)
 
-```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=8.5, fig.height=4, warning=FALSE, message=FALSE, fig.cap="\\label{fig:Abundance1}Example of taxonomic abundance of samples", abundance}
+```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=8.5, fig.height=4, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:Abundance1}Example of taxonomic abundance of samples", abundance}
 library(ggplot2)
 library(MicrobiotaProcess)
 
@@ -216,7 +216,7 @@ fclass
 
 If you want to view the count of taxonomy, you can set the `count` parameter of `ggbartax` to `TRUE`.
 
-```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=8.5, fig.height=4, warning=FALSE, message=FALSE, fig.cap="\\label{fig:Abundance2}Example of taxonomic abundance (Count) of samples", abundance2}
+```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=8.5, fig.height=4, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:Abundance2}Example of taxonomic abundance (Count) of samples", abundance2}
 pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="Group") +
           xlab(NULL) +
           ylab("count reads") +
@@ -231,7 +231,7 @@ The Venn or UpSet plot can help us to obtain the difference between groups in ov
 
 ![](./img/fig6.png)
 
-```{r, fold.output=FALSE, fold.plot=FALSE, fig.width=6, fig.height=6, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:PCA}Example Venn or Upset plot", Venn}
+```{r, fold.output=FALSE, fold.plot=FALSE, fig.width=3, fig.height=3, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:PCA}Example of Venn plot", Venn}
 vennlist <- get_vennlist(obj=ps, factorNames="Group")
 upsetda <- get_upset(obj=ps, factorNames="Group")
 library(VennDiagram)
@@ -246,7 +246,7 @@ vennp <- venn.diagram(vennlist,
                       fontfamily = "serif",
                       fontface = "bold",
                       cex = 1.2,
-                      cat.cex = 1.6,
+                      cat.cex = 1.3,
                       cat.default.pos = "outer",
                       cat.dist=0.1,
                       margin = 0.1, 
@@ -254,8 +254,10 @@ vennp <- venn.diagram(vennlist,
                       lty ='dotted',
                       imagetype = "svg")
 grid::grid.draw(vennp)
+```
 
-upset(upsetda, sets=unique(as.vector(ps@sam_data$Group)), 
+```{r, old.output=FALSE, fold.plot=FALSE, fig.width=5, fig.height=3, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:PCA}Example of Upset plot", Upset}
+upset(upsetda, sets=unique(as.vector(sample_data(ps)$Group)), 
       sets.bar.color = "#56B4E9",
       order.by = "freq", 
       empty.intersections = "on")
@@ -269,7 +271,7 @@ upset(upsetda, sets=unique(as.vector(ps@sam_data$Group)),
 
 ![](./img/fig7.png)
 
-```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=9, fig.height=3.6, warning=FALSE, message=FALSE, fig.cap="\\label{fig:PCA}Example of PCA of samples", PCAplot}
+```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=9, fig.height=3.6, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:PCA}Example of PCA of samples", PCAplot}
 library(MicrobiotaProcess)
 library(patchwork)
 # If the input was normalized, the method parameter should be setted NULL.
@@ -289,7 +291,7 @@ pcaplot1 | pcaplot2
 
 ![](./img/fig7.png)
 
-```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=9, fig.height=3.6, warning=FALSE, message=FALSE, fig.cap="\\label{fig:PCoA}Example of PCoA of samples", PCoAplot}
+```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=9, fig.height=3.6, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:PCoA}Example of PCoA of samples", PCoAplot}
 # distmethod
 # "unifrac",  "wunifrac", "manhattan", "euclidean", "canberra", "bray", "kulczynski" ...(vegdist, dist)
 pcoares <- get_pcoa(obj=ps, distmethod="bray", method="hellinger")
@@ -310,7 +312,7 @@ We also can perform the Permutational Multivariate Analysis of Variance using th
 
 ```{r class.source = 'fold-hide'} 
 distme <- get_dist(ps, distmethod ="bray", method="hellinger")
-sampleda <- data.frame(ps@sam_data, check.names=FALSE)
+sampleda <- data.frame(sample_data(ps), check.names=FALSE)
 sampleda <- sampleda[match(colnames(as.matrix(distme)),rownames(sampleda)),,drop=FALSE]
 sampleda$Group <- factor(sampleda$Group)
 set.seed(1024)
@@ -324,7 +326,7 @@ data.frame(adores$aov.tab)
 
 ![](./img/fig8.png)
 
-```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=10, fig.height=4, warning=FALSE, message=FALSE, fig.cap="\\label{fig:HClust}Example of hierarchical clustering of samples", Clust}
+```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=10, fig.height=4, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:HClust}Example of hierarchical clustering of samples", Clust}
 library(ggplot2)
 library(MicrobiotaProcess)
 library(ggtree)
@@ -386,7 +388,7 @@ significant (lower pvalue), the pvalue was calculated in the first step test.
 
 ![](./img/fig9.png)
 
-```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=6, fig.height=6, warning=FALSE, message=FALSE, fig.cap="\\label{fig:clade}Example of different biomarker clade", plotclade}
+```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=6, fig.height=6, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:clade}Example of different biomarker clade", plotclade}
 diffclade_p <- ggdiffclade(
                    obj=deres, 
                    alpha=0.3, 
@@ -425,7 +427,7 @@ The bigger confident interval shows that the biomarker is more fluctuant, owing 
 
 ![](./img/fig10.png)
 
-```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=6, fig.height=4, warning=FALSE, message=FALSE, fig.cap="\\label{fig:diffboxplot}Example of biomarker boxplot and effect size", diffbox}
+```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=6, fig.height=4, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:diffboxplot}Example of biomarker boxplot and effect size", diffbox}
 diffbox <- ggdiffbox(obj=deres, box_notch=FALSE, 
 		     colorlist=c("#00AED7", "#FD9347"), l_xlabtext="relative abundance")
 diffbox
@@ -449,7 +451,7 @@ The result is similar with the result of `ggdiffbox`, the bigger confident inter
 
 ![](./img/fig12.png)
 
-```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=5, fig.height=5, warning=FALSE, message=FALSE, fig.cap="\\label{fig:ESplot}Example of effect size of biomarker", plotES}
+```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=5, fig.height=5, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:ESplot}Example of effect size of biomarker", plotES}
 es_p <- ggeffectsize(obj=deres, 
                      lineheight=0.1,
                      linewidth=0.3) + 
@@ -465,7 +467,7 @@ The result of different analysis also can be visualized with result of correlati
 
 ```{r class.source = 'fold-hide', fig.width=6, fig.height=6, fig.align="center", warning=FALSE, message=FALSE, fig.cap="\\label{fig:clade}Example of different biomarker clade and correlation of genera", plotcorAnddiff}
 genustab <- get_taxadf(ps, taxlevel=6)
-genustab <- data.frame(t(genustab@otu_table), check.names=FALSE)
+genustab <- data.frame(t(otu_table(genustab)), check.names=FALSE)
 genustab <- data.frame(apply(genustab, 2, function(x)x/sum(x)), check.names=FALSE)
 
 cortest <- WGCNA::corAndPvalue(genustab, method="spearman", alternative="two.sided")
