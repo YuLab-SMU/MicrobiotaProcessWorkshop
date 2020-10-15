@@ -51,7 +51,7 @@ knitr::knit_hooks$set(
 )
 ```
 
-## Load required packages
+## 1. Load required packages
 
 ```{r setup}
 suppressPackageStartupMessages({
@@ -70,7 +70,7 @@ Here, we use the 43 pediatric IBD stool samples as example, obtained from the In
 
 ![](./img/fig1.png)
 
-## Importing the output of dada2
+## 2. Importing the output of dada2
 
 The datasets were obtained from `https://www.microbiomeanalyst.ca/MicrobiomeAnalyst/resources/data/ibd_data.zip`. It contains `ibd_asv_table.txt`, which is feature table (*row features* X *column samples*), `ibd_meta.csv`, which is metadata file of samples, and `ibd_taxa.txt`, which is the taxonomic annotation of features. In the session, we use `import_dada2` of `MicrobiotaProcess` to import the datasets, and return a `phyloseq` object.
 
@@ -101,7 +101,7 @@ ps <- rarefy_even_depth(psraw)
 ps
 ```
 
-### Other import
+### 2.1 Other import
 
 ```{r, echo=FALSE, results='asis'}
 
@@ -133,9 +133,9 @@ ps2 <- phyloseq(otu_table(otuda, taxa_are_rows=FALSE), sample_data(sampleda), ta
 ps2
 ```
 
-## alpha diversity analysis
+## 3. alpha diversity analysis
 
-### rarefaction visualization
+### 3.1 rarefaction visualization
 
 Rarefaction, based on sampling technique, was used to compensate for the effect of sample size on the number of units observed in a sample. `MicrobiotaProcess` provided `ggrarecurve` to plot the curves, based on `rrarefy` of `vegan`
 
@@ -166,7 +166,7 @@ p_rare / prare1
 
 Since the curves in each sample were near saturation, the sequencing data were great enough with very few new species undetected
 
-### Calculation and different analysis of alpha index
+### 3.2 Calculation and different analysis of alpha index
 
 Alpha index can evaluate the richness and abundance of microbial communities. `MicrobiotaProcess` provides `get_alphaindex` to calculate alpha index. Six common diversity measures (*Observe*, *Chao1*, *ACE*, *Shannon*, *Simpson*, *J*) are supported. And the different groups of samples can be tested and visualize by `ggbox`.
 
@@ -182,9 +182,9 @@ p_alpha <- ggbox(alphaobj, geom="violin", factorNames="Group") +
 p_alpha
 ```
 
-## Taxonomy composition analysis
+## 4. Taxonomy composition analysis
 
-### Statistics and visualization of specific levels
+### 4.1 Statistics and visualization of specific levels
 
 `MicrobiotaProcess` presents the `ggbartax` for the visualization of composition of microbial communities. If you want to get the abundance of specific levels of class, You can use `get_taxadf` then use `ggbartax` to visualize.
 
@@ -225,7 +225,7 @@ pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="Group") +
 pclass2
 ```
 
-### Venn or Upset plot
+### 4.2 Venn or Upset plot
 
 The Venn or UpSet plot can help us to obtain the difference between groups in overview. MicrobiotaProcess provides features to obtain the input of VennDiagram or UpSet package.
 
@@ -263,9 +263,9 @@ upset(upsetda, sets=unique(as.vector(sample_data(ps)$Group)),
       empty.intersections = "on")
 ```
 
-## beta analysis
+## 5. beta analysis
 
-### PCA analysis
+### 5.1 PCA analysis
 
 `PCA` (Principal component analysis) and `PCoA` (Principal Coordinate Analysis) are general statistical procedures to compare groups of samples. And `PCoA` can based on the phylogenetic or count-based distance metrics, such as `Bray-Curtis`, `Jaccard`, `Unweighted-UniFrac` and `weighted-UniFrac`. `MicrobiotaProcess` presents the `get_pca`, `get_pcoa` and `ggordpoint` for the analysis.
 
@@ -287,7 +287,7 @@ pcaplot2 <- ggordpoint(obj=pcares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
 pcaplot1 | pcaplot2
 ```
 
-### PCoA analysis
+### 5.2 PCoA analysis
 
 ![](./img/fig7.png)
 
@@ -306,7 +306,7 @@ pcoaplot2 <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
 pcoaplot1 | pcoaplot2
 ```
 
-### Permutational Multivariate Analysis of Variance
+### 5.3 Permutational Multivariate Analysis of Variance
 
 We also can perform the Permutational Multivariate Analysis of Variance using the `vegan`
 
@@ -320,7 +320,7 @@ adores <- adonis(distme ~ Group, data=sampleda, permutation=9999)
 data.frame(adores$aov.tab)
 ```
 
-### hierarchical cluster analysis of samples
+### 5.4 hierarchical cluster analysis of samples
 
 `beta diversity` metrics can assess the differences between microbial communities. It can be visualized with `PCA` or `PCoA`, this can also be visualized with hierarchical clustering. `MicrobiotaProcess` implements the analysis based on `ggtree`.
 
@@ -354,7 +354,7 @@ cplot2 <- ggclust(obj=hcsample,
 cplot1 | cplot2
 ```
 
-## biomarker discovery
+## 6. biomarker discovery
 
 This package provides `diff_analysis` to detect the biomarker. And the results can be visualized by `ggdiffbox`, `ggdiffclade`, `ggeffectsize` and `ggdifftaxbar`
 
@@ -381,7 +381,7 @@ deres <- diff_analysis(obj = ps, classgroup = "Group",
 deres
 ```
 
-### visualization of different results by `ggdiffclade`
+### 6.1 visualization of different results by `ggdiffclade`
 
 The color of discriminative taxa represent the taxa is more abundant in the corresponding group. The point size shows the negative logarithms (base 10) of pvalue. The bigger size of point shows more
 significant (lower pvalue), the pvalue was calculated in the first step test.
@@ -420,7 +420,7 @@ diffclade_p <- ggdiffclade(
 diffclade_p
 ```
 
-### visualization of different results by `ggdiffbox`
+### 6.2 visualization of different results by `ggdiffbox`
 
 The left panel represents the relative abundance or abundance (according the standard_method) of biomarker, the right panel represents the confident interval of effect size (LDA or MDA) of biomarker.
 The bigger confident interval shows that the biomarker is more fluctuant, owing to the influence of samples number.
@@ -433,7 +433,7 @@ diffbox <- ggdiffbox(obj=deres, box_notch=FALSE,
 diffbox
 ```
 
-### visualization of different results by `ggdifftaxbar`
+### 6.3 visualization of different results by `ggdifftaxbar`
 
 `ggdifftaxbar` can visualize the abundance of biomarker in each samples of groups, the mean and median abundance of groups or subgroups are also showed. `output` parameter is the directory of output.
 
@@ -445,7 +445,7 @@ ggdifftaxbar(obj=deres, xtextsize=1.5,
              coloslist=c("#00AED7", "#FD9347"))
 ```
 
-### visualization of different results by `ggeffectsize`
+### 6.4 visualization of different results by `ggeffectsize`
 
 The result is similar with the result of `ggdiffbox`, the bigger confident interval shows that the biomarker is more fluctuant owing to the influence of samples number.
 
@@ -461,7 +461,7 @@ es_p <- ggeffectsize(obj=deres,
 es_p
 ```
 
-## Correlation of taxonomy
+## 7. Correlation of taxonomy
 
 The result of different analysis also can be visualized with result of correlation.
 
@@ -527,7 +527,7 @@ p2 <- p +
 p2
 ```
 
-## Session information
+## 8. Session information
 
 Here is the output of `sessionInfo()` on the system on which this document was compiled:
 
@@ -535,4 +535,4 @@ Here is the output of `sessionInfo()` on the system on which this document was c
 sessionInfo()
 ```
 
-## Reference
+## 9. Reference
