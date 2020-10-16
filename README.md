@@ -5,7 +5,8 @@
 # Instructors name and contact information
 
   - Shuangbin Xu: <xshuangbin@163.com>
-  - Guangchuang Yu: <guangchuangyu@gmail.com>
+      - Department of Bioinformatics, School of Basic Medical Sciences,
+        Southern Medical University, Guangzhou, China
 
 # Workshop description
 
