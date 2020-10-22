@@ -7,6 +7,7 @@
   - Shuangbin Xu: <xshuangbin@163.com>
       - Department of Bioinformatics, School of Basic Medical Sciences,
         Southern Medical University, Guangzhou, China
+  - Supervisor: Guangchuang Yu
 
 # Workshop description
 
