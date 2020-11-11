@@ -141,7 +141,7 @@ Rarefaction, based on sampling technique, was used to compensate for the effect 
 
 ![](./img/fig3.png)
 
-```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=9.5, fig.height=6, fig.align="center",warning=FALSE, message=FALSE, fig.cap="\\label{fig:Rarecurve}Example of rarefaction curve of samples", rarecurve}
+```{r class.source = 'fold-show', fold.output=FALSE, fold.plot=FALSE, fig.width=9.5, fig.height=8, fig.align="center",warning=FALSE, message=FALSE, fig.cap="\\label{fig:Rarecurve}Example of rarefaction curve of samples", rarecurve}
 library(MicrobiotaProcess)
 library(patchwork)
 # for reproducibly random number
@@ -154,14 +154,26 @@ p_rare <- ggrarecurve(obj=ps,
 set.seed(1024)
 prare1 <- ggrarecurve(obj=ps, factorNames="Group",
                       indexNames=c("Observe", "Chao1", "ACE"),
-                      chunks=400, se=FALSE) +
+                      chunks=400 
+                      ) +
           scale_fill_manual(values=c("#00AED7", "#FD9347"))+
           scale_color_manual(values=c("#00AED7", "#FD9347"))+
           theme_bw()+
           theme(axis.text=element_text(size=8), panel.grid=element_blank(),
                 strip.background = element_rect(colour=NA,fill="grey"),
+                strip.text.x = element_text(face="bold"))          
+prare2 <- ggrarecurve(obj=ps,
+                      factorNames="Group",
+                      shadow=FALSE,
+                      indexNames=c("Observe", "Chao1", "ACE"),
+                      chunks=400 
+                      ) +
+          scale_color_manual(values=c("#00AED7", "#FD9347"))+
+          theme_bw()+
+          theme(axis.text=element_text(size=8), panel.grid=element_blank(),
+                strip.background = element_rect(colour=NA,fill="grey"),
                 strip.text.x = element_text(face="bold"))
-p_rare / prare1
+p_rare / prare1 / prare2
 ```
 
 Since the curves in each sample were near saturation, the sequencing data were great enough with very few new species undetected
